@@ -2124,6 +2124,7 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+    <script src="https://js.instamojo.com/v1/checkout.js"></script>
     <script>
       // Initialize Swiper
       const swiper = new Swiper(".hero-slider", {
@@ -2286,76 +2287,141 @@
         if (form) form.remove();
       }
 
+      // Configure Instamojo Seamless Checkout
+      Instamojo.configure({
+        handlers: {
+          onOpen: function () {
+            console.log("Payment modal opened");
+          },
+          onClose: function () {
+            console.log("Payment modal closed");
+          },
+          onSuccess: function (response) {
+            console.log("Payment Success:", response);
+
+            // Store payment success info
+            const registrationData = JSON.parse(
+              localStorage.getItem("heritage_fest_temp_registration") || "{}"
+            );
+            registrationData.payment_id = response.payment_id;
+            registrationData.payment_request_id = response.payment_request_id;
+            registrationData.payment_status = "success";
+            registrationData.timestamp = new Date().toISOString();
+
+            localStorage.setItem(
+              "heritage_fest_registration",
+              JSON.stringify(registrationData)
+            );
+            localStorage.removeItem("heritage_fest_temp_registration");
+
+            // Close the registration form if it's still open
+            closeParticipantForm();
+
+            // Show success message
+            alert(
+              `🎉 Payment Successful!\\n\\nThank you ${registrationData.name} for registering for Heritage Fest 2025!\\n\\nEvent: ${registrationData.eventType} (${registrationData.registrationType})\\nAmount: ₹${registrationData.price}\\n\\nPayment ID: ${response.payment_id}\\n\\nYou'll receive confirmation details on your email: ${registrationData.email}`
+            );
+          },
+          onFailure: function (response) {
+            console.log("Payment Failed:", response);
+
+            // Re-enable the payment button
+            const submitBtn = document.querySelector(
+              '#registration-form button[type="submit"]'
+            );
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = `Pay ₹${
+                JSON.parse(
+                  localStorage.getItem("heritage_fest_temp_registration") ||
+                    "{}"
+                ).price || 0
+              } with Instamojo`;
+            }
+
+            alert(
+              "Payment failed. Please try again or contact us at +91 97550 98618"
+            );
+          },
+        },
+      });
+
       async function createInstamojoPayment(
         eventType,
         registrationType,
         price,
         formData
       ) {
-        // const backendUrl = 'http://localhost:3001/create-payment'; // This is for local testing
-        const backendUrl = "/create-payment"; // This will work on both localhost and Vercel
-
         const submitBtn = document.querySelector(
           '#registration-form button[type="submit"]'
         );
         submitBtn.disabled = true;
         submitBtn.innerHTML = "Processing...";
 
-        // Correctly prepare data for the backend
-        const paymentData = {
-          purpose: `Heritage Fest 2025 - ${eventType.replace(
-            "-",
-            " "
-          )} (${registrationType})`,
-          amount: price,
-          buyer_name: formData.get("name"),
-          buyer_email: formData.get("email"),
-          buyer_phone: formData.get("phone"),
-          redirect_url: `${window.location.origin}/payment-success.html`, // A simple success page
+        // Store registration data temporarily
+        const tempRegistrationData = {
+          eventType: eventType.replace("-", " "),
+          registrationType,
+          price,
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          age: formData.get("age"),
+          address: formData.get("address"),
+          members: formData.get("members") || "",
         };
 
+        localStorage.setItem(
+          "heritage_fest_temp_registration",
+          JSON.stringify(tempRegistrationData)
+        );
+
         try {
-          const response = await fetch(backendUrl, {
+          // Create payment request on your backend
+          const response = await fetch("/api/create-payment", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(paymentData),
+            body: JSON.stringify({
+              purpose: `Heritage Fest 2025 - ${eventType.replace(
+                "-",
+                " "
+              )} (${registrationType})`,
+              amount: price,
+              buyer_name: formData.get("name"),
+              buyer_email: formData.get("email"),
+              buyer_phone: formData.get("phone"),
+              redirect_url: window.location.origin,
+            }),
           });
 
           if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(
-              errorData.details?.message || `Server error: ${response.status}`
-            );
+            throw new Error(`Server error: ${response.status}`);
           }
 
           const result = await response.json();
           console.log("Payment response:", result);
 
           if (result.paymentUrl) {
-            // Open payment URL
-            window.open(result.paymentUrl, "_blank");
-
-            // Close form
-            closeParticipantForm();
-
-            // Show success message
-            alert(
-              `Registration initiated! You're being redirected for payment of ₹${price}.\\n\\nAfter payment, you'll receive confirmation via email and SMS.`
-            );
+            // Use Instamojo Seamless Checkout
+            Instamojo.open(result.paymentUrl);
           } else {
             throw new Error("Payment URL not received from server.");
           }
         } catch (error) {
           console.error("Payment creation failed:", error);
+
+          // Fallback: Use direct Instamojo link for this event
+          const directLink = `https://www.instamojo.com/@heritagefest2025/`;
           alert(
-            "Sorry, there was an error processing your registration.\\n\\n" +
-              error.message +
-              "\\n\\nPlease try again or contact us directly at +91 97550 98618"
+            `Server temporarily unavailable. Opening direct payment link.\\n\\nEvent: ${tempRegistrationData.eventType} (${registrationType})\\nAmount: ₹${price}\\n\\nPlease complete payment and contact us at +91 97550 98618 with your details.`
           );
+
+          // Open fallback link
+          Instamojo.open(directLink);
         } finally {
-          // Re-enable the button if the form is still open
+          // Re-enable button in case of error
           if (document.getElementById("participant-form")) {
             submitBtn.disabled = false;
             submitBtn.innerHTML = `Pay ₹${price} with Instamojo`;
