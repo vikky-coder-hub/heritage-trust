@@ -2295,6 +2295,25 @@
         // const backendUrl = 'http://localhost:3001/create-payment'; // This is for local testing
         const backendUrl = "/create-payment"; // This will work on both localhost and Vercel
 
+        const submitBtn = document.querySelector(
+          '#registration-form button[type="submit"]'
+        );
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "Processing...";
+
+        // Correctly prepare data for the backend
+        const paymentData = {
+          purpose: `Heritage Fest 2025 - ${eventType.replace(
+            "-",
+            " "
+          )} (${registrationType})`,
+          amount: price,
+          buyer_name: formData.get("name"),
+          buyer_email: formData.get("email"),
+          buyer_phone: formData.get("phone"),
+          redirect_url: `${window.location.origin}/payment-success.html`, // A simple success page
+        };
+
         try {
           const response = await fetch(backendUrl, {
             method: "POST",
@@ -2304,66 +2323,42 @@
             body: JSON.stringify(paymentData),
           });
 
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(
+              errorData.details?.message || `Server error: ${response.status}`
+            );
+          }
+
           const result = await response.json();
           console.log("Payment response:", result);
 
-          if (result.success) {
-            // Store registration data for later confirmation
-            const registrationData = {
-              eventType,
-              registrationType,
-              price,
-              name: participantName,
-              email: participantEmail,
-              phone: participantPhone,
-              age: formData.get("age"),
-              address: formData.get("address"),
-              members: formData.get("members") || "",
-              timestamp: new Date().toISOString(),
-              payment_request_id: result.payment_request.id,
-            };
-
-            localStorage.setItem(
-              "heritage_fest_registration",
-              JSON.stringify(registrationData)
-            );
-
+          if (result.paymentUrl) {
             // Open payment URL
-            window.open(result.payment_url, "_blank");
+            window.open(result.paymentUrl, "_blank");
 
             // Close form
             closeParticipantForm();
 
             // Show success message
             alert(
-              `Registration initiated! You're being redirected to Instamojo for payment of ₹${price}.\\n\\nAfter payment, you'll receive confirmation via email and SMS.`
+              `Registration initiated! You're being redirected for payment of ₹${price}.\\n\\nAfter payment, you'll receive confirmation via email and SMS.`
             );
           } else {
-            throw new Error(result.error || "Payment creation failed");
+            throw new Error("Payment URL not received from server.");
           }
         } catch (error) {
           console.error("Payment creation failed:", error);
-
-          let errorMessage =
-            "Sorry, there was an error processing your registration.";
-
-          if (error.message.includes("Failed to fetch")) {
-            errorMessage =
-              "Cannot connect to payment server. Please make sure the backend server is running on localhost:3001";
-          }
-
           alert(
-            errorMessage +
+            "Sorry, there was an error processing your registration.\\n\\n" +
+              error.message +
               "\\n\\nPlease try again or contact us directly at +91 97550 98618"
           );
-
-          // Reset button
-          const submitBtn = document.querySelector(
-            '#registration-form button[type="submit"]'
-          );
-          if (submitBtn) {
-            submitBtn.innerHTML = "Pay ₹" + price + " with Instamojo";
+        } finally {
+          // Re-enable the button if the form is still open
+          if (document.getElementById("participant-form")) {
             submitBtn.disabled = false;
+            submitBtn.innerHTML = `Pay ₹${price} with Instamojo`;
           }
         }
       }
