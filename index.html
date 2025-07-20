@@ -374,12 +374,24 @@
         cursor: pointer;
         transition: all 0.3s ease;
         font-weight: 500;
+        /* Touch-friendly enhancements */
+        min-height: 44px;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        touch-action: manipulation;
       }
 
       .tab-button.active,
       .tab-button:hover {
         background: var(--primary-color);
         color: var(--white);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(182, 133, 77, 0.3);
+      }
+
+      .tab-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 8px rgba(182, 133, 77, 0.2);
       }
 
       .tab-content {
@@ -403,6 +415,29 @@
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
         border-top: 4px solid var(--primary-color);
+        /* Mobile-friendly enhancements */
+        position: relative;
+        overflow: hidden;
+      }
+
+      .event-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(182, 133, 77, 0.05),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .event-card:hover::before {
+        left: 100%;
       }
 
       .event-card:hover {
@@ -421,35 +456,66 @@
         line-height: 1.6;
       }
 
-      .event-card .rules-btn {
+      .event-card .rules-btn,
+      .event-card .register-btn {
         background: var(--cta-color);
         color: var(--white);
         border: none;
         padding: 0.5rem 1rem;
         border-radius: 20px;
         cursor: pointer;
-        margin-top: 1rem;
-        margin-right: 0.5rem;
         transition: all 0.3s ease;
-      }
-
-      .event-card .rules-btn:hover {
-        background: var(--primary-color);
+        /* Touch-friendly enhancements */
+        min-height: 40px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+        font-weight: 500;
+        display: inline-block;
+        white-space: nowrap;
+        margin: 0;
+        vertical-align: top;
       }
 
       .event-card .register-btn {
         background: var(--primary-color);
-        color: var(--white);
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        cursor: pointer;
+        margin-left: 0.5rem;
+      }
+
+      .event-card-buttons-container {
         margin-top: 1rem;
-        transition: all 0.3s ease;
+        display: block;
+      }
+
+      .event-card .rules-btn:hover {
+        background: var(--primary-color);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+      }
+
+      .event-card .rules-btn:active {
+        transform: translateY(0);
       }
 
       .event-card .register-btn:hover {
         background: var(--accent-color);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(135, 76, 40, 0.3);
+      }
+
+      .event-card .register-btn:active {
+        transform: translateY(0);
+      }
+
+      .event-card-buttons {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        flex-wrap: nowrap;
+      }
+
+      .event-card-buttons button {
+        flex: 1;
+        min-width: 0;
       }
 
       .registration-options {
@@ -769,6 +835,43 @@
       }
 
       /* Responsive Design */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        /* Tablet optimization */
+        .events-tabs {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 2.5rem;
+          flex-wrap: wrap;
+        }
+
+        .tab-button {
+          padding: 0.7rem 1.3rem;
+          font-size: 0.95rem;
+        }
+
+        .category-banner {
+          height: 400px;
+        }
+
+        .category-banner h3 {
+          font-size: 2.2rem;
+        }
+
+        .category-banner p {
+          font-size: 1.1rem;
+        }
+
+        .event-cards {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.3rem;
+        }
+
+        .event-card {
+          padding: 1.8rem;
+        }
+      }
+
       @media (max-width: 768px) {
         .nav-menu {
           display: none;
@@ -804,14 +907,86 @@
           gap: 2rem;
         }
 
+        /* Mobile Events Section Optimization */
         .events-tabs {
-          flex-direction: column;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0.6rem;
+          margin-bottom: 2rem;
+          padding: 0 0.5rem;
+        }
+
+        .tab-button {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.85rem;
+          text-align: center;
+          min-height: 42px;
+          display: flex;
           align-items: center;
+          justify-content: center;
+          border-radius: 20px;
+        }
+
+        .category-banner {
+          height: 300px;
+          margin-bottom: 2rem;
+          border-radius: 10px;
+        }
+
+        .category-banner h3 {
+          font-size: 1.8rem;
+          margin-bottom: 0.3rem;
+        }
+
+        .category-banner p {
+          font-size: 1rem;
+          line-height: 1.4;
+        }
+
+        .category-banner-content {
+          padding: 1.5rem;
         }
 
         .event-cards {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+
+        .event-card {
+          padding: 1.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .event-card h4 {
+          font-size: 1.2rem;
+          margin-bottom: 0.8rem;
+        }
+
+        .event-card p {
+          font-size: 0.95rem;
+          margin-bottom: 1rem;
+        }
+
+        .event-card .rules-btn,
+        .event-card .register-btn {
+          padding: 0.5rem 0.8rem;
+          font-size: 0.8rem;
+          margin: 0;
+          border-radius: 12px;
+          flex: 1;
+          text-align: center;
+          min-width: 0;
+        }
+
+        .event-card .register-btn {
+          margin-left: 0;
+        }
+
+        .event-card-buttons-container {
+          margin-top: 0.8rem;
+          display: flex;
+          gap: 0.5rem;
+          width: 100%;
         }
 
         .section {
@@ -832,8 +1007,115 @@
           font-size: 2rem;
         }
 
+        /* Enhanced Mobile Events Section */
+        .events-tabs {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+          padding: 0 0.5rem;
+        }
+
+        .tab-button {
+          padding: 0.7rem 0.8rem;
+          font-size: 0.9rem;
+          width: 100%;
+          border-radius: 18px;
+          min-height: 40px;
+        }
+
+        .category-banner {
+          height: 250px;
+          margin-bottom: 1.5rem;
+          border-radius: 8px;
+        }
+
+        .category-banner h3 {
+          font-size: 1.5rem;
+          margin-bottom: 0.2rem;
+        }
+
+        .category-banner p {
+          font-size: 0.9rem;
+          line-height: 1.3;
+        }
+
+        .category-banner-content {
+          padding: 1rem;
+        }
+
         .event-cards {
           grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .event-card {
+          padding: 1.2rem;
+          border-radius: 10px;
+        }
+
+        .event-card h4 {
+          font-size: 1.1rem;
+          margin-bottom: 0.7rem;
+          line-height: 1.3;
+        }
+
+        .event-card h4 i {
+          margin-right: 0.5rem;
+          font-size: 0.9rem;
+        }
+
+        .event-card p {
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+          line-height: 1.5;
+        }
+
+        .event-card .rules-btn,
+        .event-card .register-btn {
+          padding: 0.6rem 0.8rem;
+          font-size: 0.8rem;
+          margin: 0;
+          border-radius: 12px;
+          flex: 1;
+          text-align: center;
+          min-width: 0;
+        }
+
+        .event-card .register-btn {
+          margin-left: 0;
+        }
+
+        .event-card-buttons-container {
+          margin-top: 0.5rem;
+          display: flex;
+          gap: 0.5rem;
+          width: 100%;
+        }
+
+        .registration-options {
+          margin-top: 0.8rem;
+          padding: 0.8rem;
+          border-radius: 8px;
+        }
+
+        .option-buttons {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .option-btn {
+          padding: 0.7rem 1rem;
+          font-size: 0.9rem;
+          border-radius: 20px;
+        }
+
+        .section {
+          padding: 2.5rem 0;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+          margin-bottom: 2rem;
         }
 
         .modal-content {
