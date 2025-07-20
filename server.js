@@ -3,18 +3,26 @@ const cors = require("cors");
 const axios = require("axios");
 const path = require("path");
 const qs = require("qs");
+const fs = require("fs");
+const nodemailer = require("nodemailer");
+
+// Load environment variables
+require("dotenv").config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
-// Instamojo credentials
-const INSTAMOJO_API_KEY = "59cb56bcf6bf603e353f0f308baca3a9";
-const INSTAMOJO_AUTH_TOKEN = "4e72062478086ac50d848508c4f9aaa6";
-const INSTAMOJO_SALT = "8e9601d4b7494ba189c0361cba45814d";
+// Instamojo credentials from environment variables
+const INSTAMOJO_API_KEY = process.env.INSTAMOJO_API_KEY;
+const INSTAMOJO_AUTH_TOKEN = process.env.INSTAMOJO_AUTH_TOKEN;
+const INSTAMOJO_BASE_URL = process.env.INSTAMOJO_BASE_URL || "https://www.instamojo.com/api/1.1/";
 
-// For production use - more reliable than test server
-const INSTAMOJO_BASE_URL = "https://www.instamojo.com/api/1.1/";
-// For sandbox testing: https://test.instamojo.com/api/1.1/
+// Validate required environment variables
+if (!INSTAMOJO_API_KEY || !INSTAMOJO_AUTH_TOKEN) {
+  console.error("❌ Missing required environment variables: INSTAMOJO_API_KEY or INSTAMOJO_AUTH_TOKEN");
+  console.error("Please check your .env file");
+  process.exit(1);
+}
 
 // Middleware
 app.use(cors());
@@ -25,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 
 // Create payment request
-app.post("/create-payment", async (req, res) => {
+app.post("/api/create-payment", async (req, res) => {
   try {
     const {
       amount,
@@ -36,8 +44,43 @@ app.post("/create-payment", async (req, res) => {
       redirect_url,
     } = req.body;
 
+    // Input validation
+    if (!amount || !purpose || !buyer_name || !buyer_email || !buyer_phone) {
+      return res.status(400).json({
+        success: false,
+        error: "Missing required fields: amount, purpose, buyer_name, buyer_email, buyer_phone"
+      });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(buyer_email)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid email format"
+      });
+    }
+
+    // Validate phone number (10 digits)
+    const phoneRegex = /^[0-9]{10}$/;
+    if (!phoneRegex.test(buyer_phone)) {
+      return res.status(400).json({
+        success: false,
+        error: "Phone number must be 10 digits"
+      });
+    }
+
+    // Validate amount (minimum ₹1, maximum ₹10000)
+    const numAmount = parseFloat(amount);
+    if (isNaN(numAmount) || numAmount < 1 || numAmount > 10000) {
+      return res.status(400).json({
+        success: false,
+        error: "Amount must be between ₹1 and ₹10000"
+      });
+    }
+
     console.log("Creating payment request:", {
-      amount,
+      amount: numAmount,
       purpose,
       buyer_name,
       buyer_email,
@@ -281,7 +324,74 @@ app.get("/payment-failure", (req, res) => {
     `);
 });
 
-// Webhook to handle payment notifications (optional)
+// Registration data storage endpoint
+app.post("/api/save-registration", async (req, res) => {
+  try {
+    const registrationData = {
+      ...req.body,
+      timestamp: new Date().toISOString(),
+      id: Date.now().toString()
+    };
+
+    // Create registrations directory if it doesn't exist
+    const registrationsDir = path.join(__dirname, 'registrations');
+    if (!fs.existsSync(registrationsDir)) {
+      fs.mkdirSync(registrationsDir);
+    }
+
+    // Save individual registration file
+    const filename = `registration_${registrationData.id}.json`;
+    const filepath = path.join(registrationsDir, filename);
+    
+    fs.writeFileSync(filepath, JSON.stringify(registrationData, null, 2));
+
+    // Also append to master registrations file
+    const masterFile = path.join(registrationsDir, 'all_registrations.json');
+    let allRegistrations = [];
+    
+    if (fs.existsSync(masterFile)) {
+      const existingData = fs.readFileSync(masterFile, 'utf8');
+      allRegistrations = JSON.parse(existingData);
+    }
+    
+    allRegistrations.push(registrationData);
+    fs.writeFileSync(masterFile, JSON.stringify(allRegistrations, null, 2));
+
+    console.log(`✅ Registration saved: ${registrationData.name} - ${registrationData.eventType}`);
+    
+    res.json({ 
+      success: true, 
+      message: "Registration saved successfully",
+      registrationId: registrationData.id
+    });
+
+  } catch (error) {
+    console.error("Error saving registration:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: "Failed to save registration data" 
+    });
+  }
+});
+
+// Get all registrations (admin endpoint)
+app.get("/api/registrations", (req, res) => {
+  try {
+    const masterFile = path.join(__dirname, 'registrations', 'all_registrations.json');
+    
+    if (fs.existsSync(masterFile)) {
+      const registrations = JSON.parse(fs.readFileSync(masterFile, 'utf8'));
+      res.json({ success: true, registrations });
+    } else {
+      res.json({ success: true, registrations: [] });
+    }
+  } catch (error) {
+    console.error("Error reading registrations:", error);
+    res.status(500).json({ success: false, error: "Failed to read registrations" });
+  }
+});
+
+// Webhook to handle payment notifications
 app.post("/webhook", (req, res) => {
   console.log("Webhook received:", req.body);
 
@@ -301,7 +411,7 @@ app.listen(PORT, () => {
   );
   console.log(`📱 Your website is available at: http://localhost:${PORT}`);
   console.log(
-    `💳 Payment API endpoint: http://localhost:${PORT}/create-payment`
+    `💳 Payment API endpoint: http://localhost:${PORT}/api/create-payment`
   );
   console.log("");
   console.log("🔥 Ready to accept payments!");

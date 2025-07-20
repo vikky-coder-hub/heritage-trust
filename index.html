@@ -2272,6 +2272,47 @@
             e.preventDefault();
             const formData = new FormData(this);
 
+            // Client-side validation
+            const name = formData.get("name").trim();
+            const email = formData.get("email").trim();
+            const phone = formData.get("phone").trim();
+            const age = parseInt(formData.get("age"));
+
+            // Validate required fields
+            if (!name || name.length < 2) {
+              alert("Please enter a valid full name (minimum 2 characters)");
+              return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              alert("Please enter a valid email address");
+              return;
+            }
+
+            // Validate phone number (10 digits)
+            const phoneRegex = /^[0-9]{10}$/;
+            if (!phoneRegex.test(phone)) {
+              alert("Please enter a valid 10-digit phone number");
+              return;
+            }
+
+            // Validate age
+            if (isNaN(age) || age < 3 || age > 100) {
+              alert("Please enter a valid age between 3 and 100");
+              return;
+            }
+
+            // Validate group members if it's a group registration
+            if (registrationType === "group") {
+              const members = formData.get("members").trim();
+              if (!members || members.length < 10) {
+                alert("Please provide group member details (Name and Age for each member)");
+                return;
+              }
+            }
+
             // Create payment with Instamojo
             createInstamojoPayment(
               eventType,
@@ -2296,7 +2337,7 @@
           onClose: function () {
             console.log("Payment modal closed");
           },
-          onSuccess: function (response) {
+          onSuccess: async function (response) {
             console.log("Payment Success:", response);
 
             // Store payment success info
@@ -2307,6 +2348,25 @@
             registrationData.payment_request_id = response.payment_request_id;
             registrationData.payment_status = "success";
             registrationData.timestamp = new Date().toISOString();
+
+            // Save registration data to backend
+            try {
+              const saveResponse = await fetch("/api/save-registration", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(registrationData),
+              });
+
+              if (saveResponse.ok) {
+                console.log("✅ Registration data saved to server");
+              } else {
+                console.error("❌ Failed to save registration data to server");
+              }
+            } catch (error) {
+              console.error("❌ Error saving registration data:", error);
+            }
 
             localStorage.setItem(
               "heritage_fest_registration",
@@ -2906,5 +2966,8 @@
           observer.observe(el);
         });
     </script>
+
+    <!-- Instamojo Seamless Checkout Script -->
+    <script src="https://js.instamojo.com/v1/checkout.js"></script>
   </body>
 </html>
