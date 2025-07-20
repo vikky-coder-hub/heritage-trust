@@ -2292,34 +2292,11 @@
         price,
         formData
       ) {
+        // const backendUrl = 'http://localhost:3001/create-payment'; // This is for local testing
+        const backendUrl = "/create-payment"; // This will work on both localhost and Vercel
+
         try {
-          const participantName = formData.get("name");
-          const participantEmail = formData.get("email");
-          const participantPhone = formData.get("phone");
-          const eventName = eventType.replace("-", " ");
-
-          // Show loading message
-          const submitBtn = document.querySelector(
-            '#registration-form button[type="submit"]'
-          );
-          const originalText = submitBtn.innerHTML;
-          submitBtn.innerHTML = "Processing Payment... Please Wait";
-          submitBtn.disabled = true;
-
-          // Prepare payment data
-          const paymentData = {
-            purpose: `Heritage Fest 2025 - ${eventName} (${registrationType})`,
-            amount: price,
-            buyer_name: participantName,
-            buyer_email: participantEmail,
-            buyer_phone: participantPhone,
-            redirect_url: window.location.origin + "/payment-success",
-          };
-
-          console.log("Sending payment request:", paymentData);
-
-          // Make request to our backend
-          const response = await fetch("http://localhost:3001/create-payment", {
+          const response = await fetch(backendUrl, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
