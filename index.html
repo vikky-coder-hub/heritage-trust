@@ -6,26 +6,22 @@
     <title>Heritage Fest 2025 - Hare Krishna Movement, Bhilai</title>
     <meta
       name="description"
-      content="Join Heritage Fest 2025 organized by Hare Krishna Movement, Bhilai. Celebrate culture and devotion through Dance, Music, Art, Literature and Theatre competitions."
-    />
+      content="Join Heritage Fest 2025 organized by Hare Krishna Movement, Bhilai. Celebrate culture and devotion through Dance, Music, Art, Literature and Theatre competitions." />
 
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
 
     <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- Swiper.js for Carousel -->
     <link
       rel="stylesheet"
-      href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
-    />
+      href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
 
     <style>
       /* Reset and Base Styles */
@@ -760,9 +756,11 @@
         padding: 2rem;
         border-radius: 15px;
         width: 90%;
-        max-width: 600px;
+        max-width: 800px;
+        max-height: 80vh;
         position: relative;
         animation: slideIn 0.3s ease;
+        overflow-y: auto;
       }
 
       .close {
@@ -776,6 +774,30 @@
 
       .close:hover {
         color: var(--primary-color);
+      }
+
+      #modal-body {
+        max-height: calc(80vh - 120px);
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      #modal-body::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      #modal-body::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+
+      #modal-body::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+        border-radius: 4px;
+      }
+
+      #modal-body::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-color);
       }
 
       /* Back to Top Button */
@@ -1135,8 +1157,7 @@
             <img
               src="https://hkmraipur.org/wp-content/uploads/2025/07/HKM-LogoBhilai-Raipur-01-1536x921.png.webp"
               alt="Heritage Fest 2025"
-              style="height: 60px; width: auto; border-radius: 7px"
-            />
+              style="height: 60px; width: auto; border-radius: 7px" />
           </div>
           <nav class="main-nav">
             <ul class="nav-menu" id="nav-menu">
@@ -1172,8 +1193,7 @@
             class="swiper-slide hero-slide"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/heritage_fest_02.jpg');
-            "
-          >
+            ">
             <div class="hero-overlay"></div>
             <div class="hero-content">
               <h1 class="hero-title">Heritage Fest 2025</h1>
@@ -1187,8 +1207,7 @@
             class="swiper-slide hero-slide"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/heritage_fest_05.jpg');
-            "
-          >
+            ">
             <div class="hero-overlay"></div>
             <div class="hero-content">
               <h1 class="hero-title">Experience Divine Arts</h1>
@@ -1202,8 +1221,7 @@
             class="swiper-slide hero-slide"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/heritage_fest_06.jpg');
-            "
-          >
+            ">
             <div class="hero-overlay"></div>
             <div class="hero-content">
               <h1 class="hero-title">Join the Celebration</h1>
@@ -1248,8 +1266,7 @@
           <div class="about-image">
             <img
               src="https://hkmraipur.org/wp-content/uploads/2025/07/heritage_fest_10.jpg"
-              alt="Heritage Fest Cultural Performance"
-            />
+              alt="Heritage Fest Cultural Performance" />
           </div>
         </div>
       </div>
@@ -1284,8 +1301,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/dance.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Dance Categories</h3>
               <p>
@@ -1306,14 +1322,12 @@
               </p>
               <button
                 class="rules-btn"
-                onclick="openModal('bharatnatyam-rules')"
-              >
+                onclick="openModal('bharatnatyam-rules')">
                 Guidelines
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('bharatnatyam')"
-              >
+                onclick="showRegistrationOptions('bharatnatyam')">
                 Register
               </button>
               <div id="bharatnatyam-registration" class="registration-options">
@@ -1321,15 +1335,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('bharatnatyam', 'solo')"
-                  >
+                    onclick="registerForEvent('bharatnatyam', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('bharatnatyam', 'group')"
-                  >
+                    onclick="registerForEvent('bharatnatyam', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1347,8 +1359,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('classical')"
-              >
+                onclick="showRegistrationOptions('classical')">
                 Register
               </button>
               <div id="classical-registration" class="registration-options">
@@ -1356,15 +1367,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('classical', 'solo')"
-                  >
+                    onclick="registerForEvent('classical', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('classical', 'group')"
-                  >
+                    onclick="registerForEvent('classical', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1379,33 +1388,28 @@
               </p>
               <button
                 class="rules-btn"
-                onclick="openModal('semi-classical-rules')"
-              >
+                onclick="openModal('semi-classical-rules')">
                 Guidelines
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('semi-classical')"
-              >
+                onclick="showRegistrationOptions('semi-classical')">
                 Register
               </button>
               <div
                 id="semi-classical-registration"
-                class="registration-options"
-              >
+                class="registration-options">
                 <h5>Choose Registration Type</h5>
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('semi-classical', 'solo')"
-                  >
+                    onclick="registerForEvent('semi-classical', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('semi-classical', 'group')"
-                  >
+                    onclick="registerForEvent('semi-classical', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1420,14 +1424,12 @@
               </p>
               <button
                 class="rules-btn"
-                onclick="openModal('light-dance-rules')"
-              >
+                onclick="openModal('light-dance-rules')">
                 Guidelines
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('light-dance')"
-              >
+                onclick="showRegistrationOptions('light-dance')">
                 Register
               </button>
               <div id="light-dance-registration" class="registration-options">
@@ -1435,15 +1437,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('light-dance', 'solo')"
-                  >
+                    onclick="registerForEvent('light-dance', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('light-dance', 'group')"
-                  >
+                    onclick="registerForEvent('light-dance', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1459,8 +1459,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/music.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Music Categories</h3>
               <p>
@@ -1481,8 +1480,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('gita')"
-              >
+                onclick="showRegistrationOptions('gita')">
                 Register
               </button>
               <div id="gita-registration" class="registration-options">
@@ -1490,15 +1488,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('gita', 'solo')"
-                  >
+                    onclick="registerForEvent('gita', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('gita', 'group')"
-                  >
+                    onclick="registerForEvent('gita', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1518,8 +1514,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('keyboard')"
-              >
+                onclick="showRegistrationOptions('keyboard')">
                 Register
               </button>
               <div id="keyboard-registration" class="registration-options">
@@ -1528,8 +1523,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('keyboard', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1549,8 +1543,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('percussion')"
-              >
+                onclick="showRegistrationOptions('percussion')">
                 Register
               </button>
               <div id="percussion-registration" class="registration-options">
@@ -1559,8 +1552,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('percussion', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1578,8 +1570,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('vocal')"
-              >
+                onclick="showRegistrationOptions('vocal')">
                 Register
               </button>
               <div id="vocal-registration" class="registration-options">
@@ -1587,15 +1578,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('vocal', 'solo')"
-                  >
+                    onclick="registerForEvent('vocal', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('vocal', 'group')"
-                  >
+                    onclick="registerForEvent('vocal', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1611,8 +1600,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/heritage_fest_17-1.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Literature Arts</h3>
               <p>
@@ -1633,8 +1621,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('rhymes')"
-              >
+                onclick="showRegistrationOptions('rhymes')">
                 Register
               </button>
               <div id="rhymes-registration" class="registration-options">
@@ -1643,8 +1630,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('rhymes', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1662,8 +1648,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('story')"
-              >
+                onclick="showRegistrationOptions('story')">
                 Register
               </button>
               <div id="story-registration" class="registration-options">
@@ -1672,8 +1657,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('story', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1689,8 +1673,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/theatre.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Theatre</h3>
               <p>
@@ -1711,8 +1694,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('costume')"
-              >
+                onclick="showRegistrationOptions('costume')">
                 Register
               </button>
               <div id="costume-registration" class="registration-options">
@@ -1721,8 +1703,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('costume', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1738,8 +1719,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/drawing.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Drawing & Painting</h3>
               <p>
@@ -1760,8 +1740,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('coloring')"
-              >
+                onclick="showRegistrationOptions('coloring')">
                 Register
               </button>
               <div id="coloring-registration" class="registration-options">
@@ -1770,8 +1749,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('coloring', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1789,8 +1767,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('painting')"
-              >
+                onclick="showRegistrationOptions('painting')">
                 Register
               </button>
               <div id="painting-registration" class="registration-options">
@@ -1799,8 +1776,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('painting', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1818,8 +1794,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('shading')"
-              >
+                onclick="showRegistrationOptions('shading')">
                 Register
               </button>
               <div id="shading-registration" class="registration-options">
@@ -1828,8 +1803,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('shading', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1847,8 +1821,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('canvas')"
-              >
+                onclick="showRegistrationOptions('canvas')">
                 Register
               </button>
               <div id="canvas-registration" class="registration-options">
@@ -1857,8 +1830,7 @@
                   <div
                     class="option-btn"
                     onclick="registerForEvent('canvas', 'solo')"
-                    style="width: 100%"
-                  >
+                    style="width: 100%">
                     Solo Registration
                     <div class="price-info">₹1</div>
                   </div>
@@ -1874,8 +1846,7 @@
             class="category-banner"
             style="
               background-image: url('https://hkmraipur.org/wp-content/uploads/2025/07/rangoli.jpg');
-            "
-          >
+            ">
             <div class="category-banner-content">
               <h3>Decoration</h3>
               <p>
@@ -1896,8 +1867,7 @@
               </button>
               <button
                 class="register-btn"
-                onclick="showRegistrationOptions('rangoli')"
-              >
+                onclick="showRegistrationOptions('rangoli')">
                 Register
               </button>
               <div id="rangoli-registration" class="registration-options">
@@ -1905,15 +1875,13 @@
                 <div class="option-buttons">
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('rangoli', 'solo')"
-                  >
+                    onclick="registerForEvent('rangoli', 'solo')">
                     Solo
                     <div class="price-info">₹1</div>
                   </div>
                   <div
                     class="option-btn"
-                    onclick="registerForEvent('rangoli', 'group')"
-                  >
+                    onclick="registerForEvent('rangoli', 'group')">
                     Group
                     <div class="price-info">₹2</div>
                   </div>
@@ -1997,8 +1965,7 @@
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.123456789!2d81.123456!3d21.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBhilai!5e0!3m2!1sen!2sin!4v1234567890"
               allowfullscreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            >
+              referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
         </div>
@@ -2016,8 +1983,7 @@
           var(--primary-color)
         );
         color: var(--white);
-      "
-    >
+      ">
       <div class="container">
         <h2 class="section-title" style="color: var(--background-color)">
           Register Now
@@ -2031,8 +1997,7 @@
             href="https://forms.google.com/heritage-fest-2025"
             target="_blank"
             class="cta-button"
-            style="font-size: 1.2rem; padding: 1.2rem 3rem; margin: 1rem"
-          >
+            style="font-size: 1.2rem; padding: 1.2rem 3rem; margin: 1rem">
             <i class="fas fa-external-link-alt"></i> Register Online
           </a>
           <p style="margin-top: 2rem; opacity: 0.9">
@@ -2215,20 +2180,60 @@
                   <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Full Name *</label>
                   <input type="text" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
                 </div>
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Class & Sections *</label>
+                  <input type="text" name="Class & Sections" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
                 
                 <div style="margin-bottom: 1rem;">
                   <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Email *</label>
                   <input type="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">School/Institutute/Organization *</label>
+                  <input type="text" name="School/Institutute/Organization" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
                 </div>
                 
                 <div style="margin-bottom: 1rem;">
                   <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Phone Number *</label>
                   <input type="tel" name="phone" required pattern="[0-9]{10}" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
                 </div>
+
+                <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Date of Birth *</label>
+                  <input type="Date" name="Date o birth" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
                 
                 <div style="margin-bottom: 1rem;">
                   <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Age *</label>
                   <input type="number" name="age" required min="3" max="100" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
+                
+                
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Guru Name *</label>
+                  <input type="text" name="Guru Name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
+
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Guru Contact No *</label>
+                  <input type="Number" name="Guru Contact no" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Parents Name *</label>
+                  <input type="text" name="Parents Name" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                </div>
+
+                
+
+                 <div style="margin-bottom: 1rem;">
+                  <label style="display: block; margin-bottom: 0.25rem; font-weight: bold;">Occupation *</label>
+                  <input type="text" name="Occupation" required style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;">
                 </div>
                 
                 ${
@@ -2309,18 +2314,15 @@
             if (registrationType === "group") {
               const members = formData.get("members").trim();
               if (!members || members.length < 10) {
-                alert("Please provide group member details (Name and Age for each member)");
+                alert(
+                  "Please provide group member details (Name and Age for each member)"
+                );
                 return;
               }
             }
 
             // Create payment with Razorpay
-            createRazorpayPayment(
-              eventType,
-              registrationType,
-              price,
-              formData
-            );
+            createRazorpayPayment(eventType, registrationType, price, formData);
           });
       }
 
@@ -2389,8 +2391,7 @@
           submitBtn.disabled = false;
           submitBtn.innerHTML = `Pay ₹${
             JSON.parse(
-              localStorage.getItem("heritage_fest_temp_registration") ||
-                "{}"
+              localStorage.getItem("heritage_fest_temp_registration") || "{}"
             ).price || 0
           } with Razorpay`;
         }
@@ -2496,11 +2497,11 @@
           }
         } catch (error) {
           console.error("Payment creation failed:", error);
-          
+
           alert(
             `Payment initialization failed. Please try again or contact us at +91 97550 98618.\\n\\nError: ${error.message}`
           );
-          
+
           handlePaymentFailure(error);
         } finally {
           // Re-enable button in case of error
@@ -2577,39 +2578,127 @@
             title: "Bharatnatyam Competition Rules",
             content: `
                         <h4>Competition Guidelines:</h4>
+                        <p>Srimad Bhagavatam describes that in the spiritual world, ‘every step is a dance’. Krishna is the greatest transcendental dancer, and His dance with the gopis of Vrindavana enchants the entire existence. A tribute to His love for ‘dance’ is the Dance competitions of Heritage Fest.</p>
+                        <table style="border-collapse: collapse; width: 100%; max-width: 800px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Bharat Natyam)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Others)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Semi Classical Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Light Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
                         <ul>
                             <li>Performance duration: 5-8 minutes</li>
                             <li>Traditional attire mandatory</li>
-                            <li>Own music arrangement required</li>
-                            <li>Judging criteria: Technique, expression, costume, overall presentation</li>
-                            <li>Age categories: Under 12, 13-18, Above 18</li>
+                            <li>Theme: Ramayana, Mahabharata, Bhagvatam</li>
+                            <li>Live or recorded music can be used. </li>
+                            <li>Songs given in HKM List are only allowed for Semi Classical Dance and Light Dance      (A & B)</li>
+                            <li>For Light Dance (F category), any non-filmy Krishna Bhajan is allowed.</li>
                         </ul>
                         <h4>What to Bring:</h4>
                         <ul>
-                            <li>Music in USB drive (MP3 format)</li>
-                            <li>Traditional costume and jewelry</li>
-                            <li>Backup music arrangement</li>
+                            <li>Filmy songs are not allowed</li>
+                            <li>Students in a solo or group of 4(min) and 6(max) can participate.</li>
+                            <li>For Classical forms pure classical dance forms like Bharatanatyam, Kathak, Kuchupudi, etc., depicting a theme from the Puranas will be allowed. (Western styles and film songs will not be allowed).</li>
+                            <li>The participants have to bring song with their own pendrive. </li>
+                            <li> Song List for Semi Classical Dance available at - 
+https://drive.google.com/drive/folders/1Qz9kXeDd66qklpclzWmn47F7gz2233vz?usp=sharing
+ </li>
+ <li>Song List for Light Dance available at -
+https://drive.google.com/drive/folders/1ookreFRW4zAe_gs63NA7pI4K_iG1SOP_?usp=sharing
+</li>
                         </ul>
                     `,
           },
           "classical-rules": {
             title: "Classical Dance (Others) Rules",
             content: `
-                        <h4>Accepted Dance Forms:</h4>
-                        <ul>
-                            <li>Kathak</li>
-                            <li>Odissi</li>
-                            <li>Kuchipudi</li>
-                            <li>Manipuri</li>
-                            <li>Mohiniyattam</li>
-                            <li>Kathakali</li>
-                        </ul>
                         <h4>Competition Guidelines:</h4>
+                        <p>Srimad Bhagavatam describes that in the spiritual world, 'every step is a dance'. Krishna is the greatest transcendental dancer, and His dance with the gopis of Vrindavana enchants the entire existence. A tribute to His love for 'dance' is the Dance competitions of Heritage Fest.</p>
+                        <table style="border-collapse: collapse; width: 100%; max-width: 800px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Bharat Natyam)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Others)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Semi Classical Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Light Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
                         <ul>
                             <li>Performance duration: 5-8 minutes</li>
-                            <li>Traditional elements must be prominent</li>
-                            <li>Authentic costume preferred</li>
-                            <li>Age-appropriate content only</li>
+                            <li>Traditional attire mandatory</li>
+                            <li>Theme: Ramayana, Mahabharata, Bhagvatam</li>
+                            <li>Live or recorded music can be used. </li>
+                            <li>Songs given in HKM List are only allowed for Semi Classical Dance and Light Dance      (A & B)</li>
+                            <li>For Light Dance (F category), any non-filmy Krishna Bhajan is allowed.</li>
+                        </ul>
+                        <h4>What to Bring:</h4>
+                        <ul>
+                            <li>Filmy songs are not allowed</li>
+                            <li>Students in a solo or group of 4(min) and 6(max) can participate.</li>
+                            <li>For Classical forms pure classical dance forms like Bharatanatyam, Kathak, Kuchupudi, etc., depicting a theme from the Puranas will be allowed. (Western styles and film songs will not be allowed).</li>
+                            <li>The participants have to bring song with their own pendrive. </li>
+                            <li> Song List for Semi Classical Dance available at - 
+https://drive.google.com/drive/folders/1Qz9kXeDd66qklpclzWmn47F7gz2233vz?usp=sharing
+ </li>
+ <li>Song List for Light Dance available at -
+https://drive.google.com/drive/folders/1ookreFRW4zAe_gs63NA7pI4K_iG1SOP_?usp=sharing
+</li>
                         </ul>
                     `,
           },
@@ -2617,18 +2706,63 @@
             title: "Semi Classical Dance Rules",
             content: `
                         <h4>Competition Guidelines:</h4>
+                        <p>Srimad Bhagavatam describes that in the spiritual world, 'every step is a dance'. Krishna is the greatest transcendental dancer, and His dance with the gopis of Vrindavana enchants the entire existence. A tribute to His love for 'dance' is the Dance competitions of Heritage Fest.</p>
+                        <table style="border-collapse: collapse; width: 100%; max-width: 800px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Bharat Natyam)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Others)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Semi Classical Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Light Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
                         <ul>
-                            <li>Performance duration: 4-6 minutes</li>
-                            <li>Blend of classical and contemporary elements</li>
-                            <li>Devotional or spiritual theme preferred</li>
-                            <li>Creative choreography encouraged</li>
-                            <li>Appropriate costume required</li>
+                            <li>Performance duration: 5-8 minutes</li>
+                            <li>Traditional attire mandatory</li>
+                            <li>Theme: Ramayana, Mahabharata, Bhagvatam</li>
+                            <li>Live or recorded music can be used. </li>
+                            <li>Songs given in HKM List are only allowed for Semi Classical Dance and Light Dance      (A & B)</li>
+                            <li>For Light Dance (F category), any non-filmy Krishna Bhajan is allowed.</li>
                         </ul>
-                        <h4>Song Recommendations:</h4>
+                        <h4>What to Bring:</h4>
                         <ul>
-                            <li>Devotional songs with modern arrangements</li>
-                            <li>Fusion of classical and light music</li>
-                            <li>No purely western music</li>
+                            <li>Filmy songs are not allowed</li>
+                            <li>Students in a solo or group of 4(min) and 6(max) can participate.</li>
+                            <li>For Classical forms pure classical dance forms like Bharatanatyam, Kathak, Kuchupudi, etc., depicting a theme from the Puranas will be allowed. (Western styles and film songs will not be allowed).</li>
+                            <li>The participants have to bring song with their own pendrive. </li>
+                            <li> Song List for Semi Classical Dance available at - 
+https://drive.google.com/drive/folders/1Qz9kXeDd66qklpclzWmn47F7gz2233vz?usp=sharing
+ </li>
+ <li>Song List for Light Dance available at -
+https://drive.google.com/drive/folders/1ookreFRW4zAe_gs63NA7pI4K_iG1SOP_?usp=sharing
+</li>
                         </ul>
                     `,
           },
@@ -2636,52 +2770,169 @@
             title: "Light Dance Competition Rules",
             content: `
                         <h4>Competition Guidelines:</h4>
+                        <p>Srimad Bhagavatam describes that in the spiritual world, 'every step is a dance'. Krishna is the greatest transcendental dancer, and His dance with the gopis of Vrindavana enchants the entire existence. A tribute to His love for 'dance' is the Dance competitions of Heritage Fest.</p>
+                        <table style="border-collapse: collapse; width: 100%; max-width: 800px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Bharat Natyam)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Others)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Semi Classical Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Light Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
                         <ul>
-                            <li>Performance duration: 3-5 minutes</li>
-                            <li>Modern/contemporary dance styles allowed</li>
-                            <li>Theme should be positive and uplifting</li>
-                            <li>Group or solo performances welcome</li>
-                            <li>Creative costumes encouraged</li>
+                            <li>Performance duration: 5-8 minutes</li>
+                            <li>Traditional attire mandatory</li>
+                            <li>Theme: Ramayana, Mahabharata, Bhagvatam</li>
+                            <li>Live or recorded music can be used. </li>
+                            <li>Songs given in HKM List are only allowed for Semi Classical Dance and Light Dance      (A & B)</li>
+                            <li>For Light Dance (F category), any non-filmy Krishna Bhajan is allowed.</li>
                         </ul>
-                        <h4>Music Guidelines:</h4>
+                        <h4>What to Bring:</h4>
                         <ul>
-                            <li>Upbeat and energetic music</li>
-                            <li>No inappropriate lyrics</li>
-                            <li>Devotional fusion music preferred</li>
+                            <li>Filmy songs are not allowed</li>
+                            <li>Students in a solo or group of 4(min) and 6(max) can participate.</li>
+                            <li>For Classical forms pure classical dance forms like Bharatanatyam, Kathak, Kuchupudi, etc., depicting a theme from the Puranas will be allowed. (Western styles and film songs will not be allowed).</li>
+                            <li>The participants have to bring song with their own pendrive. </li>
+                            <li> Song List for Semi Classical Dance available at - 
+https://drive.google.com/drive/folders/1Qz9kXeDd66qklpclzWmn47F7gz2233vz?usp=sharing
+ </li>
+ <li>Song List for Light Dance available at -
+https://drive.google.com/drive/folders/1ookreFRW4zAe_gs63NA7pI4K_iG1SOP_?usp=sharing
+</li>
                         </ul>
-                        <p><strong>Song List:</strong> <a href="https://drive.google.com/light-dance-songs" target="_blank">Download from Google Drive</a></p>
                     `,
           },
           "gita-rules": {
             title: "Gita Sloka Chanting Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
+                        <h4>Lord Narayana declares to Srila Narada Muni, yatra gayanti mad-bhaktah tatra tishthami narada: “Wherever My devotee sings My glories, I take My residence there, O Narada!” Heritage Fest celebrates the talent of mastering this rich musical form, as an offering to Lord Krishna.</h4>
+
+
+                        
+  <table style="border-collapse: collapse; width: 100%; max-width: 860px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Gita Sloka Chanting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Instrumental Music – Keyboard<br>(Classical &amp; Light) &amp; Percussion</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Vocal Music<br>(Hindustani – Classical &amp; Light)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <h4>Rules</h4>
                         <ul>
-                            <li>Duration: 3-5 minutes</li>
-                            <li>Minimum 2 slokas required</li>
-                            <li>Correct pronunciation essential</li>
-                            <li>Clear diction and rhythm</li>
-                            <li>Meaning explanation bonus points</li>
+                            <li>1.	Students in a solo & group of 6(max) can participate. </li>
+                            <li>2.	For Gita slokas refer only to “Bhagavad-gita As it is” authored by His Divine Grace A.C.  Bhaktivedanta Swami Prabhupada .</li>
+                            <li>3.	All the students in the group should chant the slokas in chorus and one student can narrate the  translation either in English or Hindi.</li>
+                            <li>4.	For Bhagavad Gita Slokas, please visit:
+https://drive.google.com/folderview?id=0B6FUT-ErZ0mzfm05c2FuYTlvSU1QT1lQSlF6YmRaLWJ5eHZyN1d2eUVvYXRfMlByd09ucUU&usp=sharing
+</li>
+                            
                         </ul>
                         <h4>Judging Criteria:</h4>
                         <ul>
-                            <li>Pronunciation accuracy (40%)</li>
-                            <li>Rhythm and melody (30%)</li>
-                            <li>Clarity and confidence (20%)</li>
-                            <li>Overall presentation (10%)</li>
+                            <li>Clarity in Pronunciation, Fluency, Synchronization and Basic Understanding.(40%)</li>
+                            
                         </ul>
                     `,
           },
           "keyboard-rules": {
             title: "Keyboard Competition Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
+                        <h4>Lord Narayana declares to Srila Narada Muni, yatra gayanti mad-bhaktah tatra tishthami narada: “Wherever My devotee sings My glories, I take My residence there, O Narada!” Heritage Fest celebrates the talent of mastering this rich musical form, as an offering to Lord Krishna.</h4>
+
+
+                        
+  <table style="border-collapse: collapse; width: 100%; max-width: 860px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Gita Sloka Chanting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Instrumental Music – Keyboard<br>(Classical &amp; Light) &amp; Percussion</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Vocal Music<br>(Hindustani – Classical &amp; Light)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
+
+     <h4>Rules</h4>
                         <ul>
-                            <li>Performance duration: 4-6 minutes</li>
-                            <li>Classical and light music categories</li>
-                            <li>Original compositions welcome</li>
-                            <li>Use of backing tracks allowed</li>
-                            <li>Own keyboard preferred (basic provided)</li>
+                            <li>Duration: 6 mins.</li>
+                            <li>	Only Solo entries are allowed.</li>
+                            <li>Category: (A) Percussion & (B) Keyboard – Classical & Light</li>
+                            <li>Students should play the instruments in classical style (Hindustani) </li>
+                            <li>5.	Accompanying instrumentalists is allowed.</li>
+                            <li>6.	Devotional song (Bhajan only)– Krishna/ Rama/ Hanuman/ Radha/ Devotees of Vishnu .</li>
+                            <li>7.	Students should bring their own musical instruments, otherwise they can sing with the help of shruthi box and should play for talas (rhythms).</li>
                         </ul>
                         <h4>Categories:</h4>
                         <ul>
@@ -2693,101 +2944,248 @@
           "percussion-rules": {
             title: "Percussion Competition Rules",
             content: `
-                        <h4>Instruments Allowed:</h4>
+                       <h4>Lord Narayana declares to Srila Narada Muni, yatra gayanti mad-bhaktah tatra tishthami narada: “Wherever My devotee sings My glories, I take My residence there, O Narada!” Heritage Fest celebrates the talent of mastering this rich musical form, as an offering to Lord Krishna.</h4>
+
+
+                        
+  <table style="border-collapse: collapse; width: 100%; max-width: 860px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Gita Sloka Chanting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Instrumental Music – Keyboard<br>(Classical &amp; Light) &amp; Percussion</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Vocal Music<br>(Hindustani – Classical &amp; Light)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
+     <h4>Rules</h4>
                         <ul>
-                            <li>Tabla</li>
-                            <li>Mridangam</li>
-                            <li>Drums (Western)</li>
-                            <li>Dholak</li>
-                            <li>Cajon</li>
+                            <li>Duration: 6 mins.</li>
+                            <li>	Only Solo entries are allowed.</li>
+                            <li>Category: (A) Percussion & (B) Keyboard – Classical & Light</li>
+                            <li>Students should play the instruments in classical style (Hindustani) </li>
+                            <li>5.	Accompanying instrumentalists is allowed.</li>
+                            <li>6.	Devotional song (Bhajan only)– Krishna/ Rama/ Hanuman/ Radha/ Devotees of Vishnu .</li>
+                            <li>7.	Students should bring their own musical instruments, otherwise they can sing with the help of shruthi box and should play for talas (rhythms).</li>
                         </ul>
-                        <h4>Competition Guidelines:</h4>
+                        <h4>Categories:</h4>
                         <ul>
-                            <li>Performance duration: 4-6 minutes</li>
-                            <li>Solo or ensemble allowed</li>
-                            <li>Accompaniment track permitted</li>
-                            <li>Own instruments recommended</li>
+                            <li>Classical: Ragas, devotional compositions</li>
+                            <li>Light: Modern arrangements, fusion</li>
                         </ul>
                     `,
           },
           "vocal-rules": {
             title: "Vocal Music Competition Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
+                        <<h4>Lord Narayana declares to Srila Narada Muni, yatra gayanti mad-bhaktah tatra tishthami narada: “Wherever My devotee sings My glories, I take My residence there, O Narada!” Heritage Fest celebrates the talent of mastering this rich musical form, as an offering to Lord Krishna.</h4>
+
+
+                        
+  <table style="border-collapse: collapse; width: 100%; max-width: 860px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Gita Sloka Chanting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Instrumental Music – Keyboard<br>(Classical &amp; Light) &amp; Percussion</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">MUSIC</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Vocal Music<br>(Hindustani – Classical &amp; Light)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+    </tbody>
+  </table>
                         <ul>
-                            <li>Performance duration: 4-6 minutes</li>
-                            <li>Devotional songs preferred</li>
-                            <li>Classical ragas welcome</li>
-                            <li>Accompaniment allowed</li>
-                            <li>Original compositions bonus points</li>
+                            <li>Students in a solo & group of 6(max) can participate.</li>
+                            <li>Stage setting time 2 mins.</li>
+                            <li>Performance Time limit – 6 mins.</li>
+                            <li>Accompanying instrumentalists is allowed.</li>
+                            <li>5.	Devotional song (Bhajan only) – Krishna/Rama/Hanuman/Radha/Devotees of Vishnu.</li>
                         </ul>
-                        <h4>Song Categories:</h4>
+                        <h4>Judging criteria:  </h4>
                         <ul>
-                            <li>Bhajans and Kirtans</li>
-                            <li>Classical compositions</li>
-                            <li>Regional devotional songs</li>
-                            <li>Contemporary spiritual music</li>
+                            <li>Voice Quality, Raga, Bhava , Rhythm Synchronization, Co-ordination and Quality of Performance.</li>
+                            
                         </ul>
                     `,
           },
           "rhymes-rules": {
             title: "Rhymes Competition Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
-                        <ul>
-                            <li>Performance duration: 2-4 minutes</li>
-                            <li>Age categories: 3-6, 7-10, 11-14</li>
-                            <li>Devotional or moral theme</li>
-                            <li>Clear pronunciation required</li>
-                            <li>Actions and expressions encouraged</li>
+                        <h4>Articulation of thoughts into meaningful words is an essential quality that is worth developing in the formative years of education. Here is an opportunity for your children to exhibit their literary skills and offer it as a birthday gift to Lord Krishna on the occasion of Sri Krishna Janmashtami.</h4>
+
+                        <table style="border-collapse: collapse; width: 100%; max-width: 830px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">LITERARY ARTS</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Rhymes</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">LITERARY ARTS</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C &amp; D</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Story Telling</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table>
+
+       <h4>RHYMES </h4>
+         <h5> Rules</>
+                    <ul>
+                            <li>Rhymes given in HKM List are only allowed.</li>
+                            <li>Time limit – 2 mins.</li>
+                            <li>Content for Rhymes available at- </li>
+                            <li>Rhymes for Class Nursery >> 
+https://drive.google.com/file/d/0B6FUT-ErZ0mzdHJNbDE0dllwcFE/view?usp=sharing&resourcekey=0-65nj1uWTNgTaoEI-VkE61w
+</li>
+                            <li>Rhymes for Class 1 – 4 >>
+https://drive.google.com/file/d/0B6FUT-ErZ0mzM2RpZVZPSjRLdDg/view?usp=sharing&resourcekey=0-NHyzmlc5vCnE7uAxf5gtMA
+</li>
                         </ul>
-                        <h4>Themes:</h4>
+                        <h4>Judging Criteria: </h4>
                         <ul>
-                            <li>Krishna stories</li>
-                            <li>Moral values</li>
-                            <li>Nature and creation</li>
-                            <li>Indian culture</li>
+                            <li>Rhythm, Actions, Pronunciation and Expression.</li>
+                            
                         </ul>
                     `,
           },
           "story-rules": {
             title: "Story Telling Competition Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
+                       <h4>Articulation of thoughts into meaningful words is an essential quality that is worth developing in the formative years of education. Here is an opportunity for your children to exhibit their literary skills and offer it as a birthday gift to Lord Krishna on the occasion of Sri Krishna Janmashtami.</h4>
+
+                        <table style="border-collapse: collapse; width: 100%; max-width: 830px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">LITERARY ARTS</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Rhymes</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">LITERARY ARTS</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C &amp; D</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Story Telling</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table>    
+         <h4>Rules</h4>
                         <ul>
-                            <li>Performance duration: 5-8 minutes</li>
-                            <li>Stories from epics and scriptures</li>
-                            <li>Engaging storytelling techniques</li>
-                            <li>Voice modulation encouraged</li>
-                            <li>Simple props allowed</li>
+                            <li>Nursery to IV: Duration: 2 min .</li>
+                            <li>V to X : Duration: 3 mins .</li>
+                            <li>Stories related to: Ramayana, Mahabharata, Bhagvatam </li>
+                            <li>3. For stories, please visit : 
+https://drive.google.com/drive/folders/0B6FUT-ErZ0mzfjVYeWpFUGFrSi1LTUNpcTRWaXN3ZGNybGpzNzBxU3JnSEE3c3RoTUFBNTA?resourcekey=0-pjtvDTUVUMJTL8f9PUp1ZQ&usp=sharing
+</li>
+                            
                         </ul>
-                        <h4>Suggested Stories:</h4>
+                        <h4>Judging Criteria: </h4>
                         <ul>
-                            <li>Krishna Leelas</li>
-                            <li>Ramayana episodes</li>
-                            <li>Mahabharata stories</li>
-                            <li>Moral tales from Puranas</li>
-                        </ul>
+                            <li>Fluency, Pronunciation, Expressions and Content Understanding.
+
+</li>
+                            
                     `,
           },
           "costume-rules": {
             title: "Puranic Costumes Competition Rules",
             content: `
-                        <h4>Competition Guidelines:</h4>
+                        <h5>Lord Narayana declares to Srila Narada Muni, yatra gayanti mad-bhaktah tatra tishthami narada: “Wherever My devotee sings My glories, I take My residence there, O Narada!” Heritage Fest celebrates the talent of mastering this rich musical form, as an offering to Lord Krishna.</h5>
+
+
+
+
+                          <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">THEATRE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Puranic Costumes</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">15</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+      <h2>PURANIC COSTUMES</h2>
+
+          <h4>Rules</h4>
                         <ul>
-                            <li>Character presentation: 3-5 minutes</li>
-                            <li>Authentic costume design</li>
-                            <li>Character portrayal and dialogue</li>
-                            <li>Historical accuracy appreciated</li>
-                            <li>Creative interpretation allowed</li>
+                            <li>Duration: 1 mins;</li>
+                            <li>Any character/situation based on Ramayana, Mahabharata, Bhagavatam .</li>
+                            <li>Costumes and make-up should be appropriate and will be the student’s responsibility</li>
+                            
                         </ul>
-                        <h4>Character Categories:</h4>
+                        <h4>Judging Criteria:</h4>
                         <ul>
-                            <li>Krishna avatars</li>
-                            <li>Ramayana characters</li>
-                            <li>Mahabharata heroes</li>
-                            <li>Goddess forms</li>
-                            <li>Sage and saint characters</li>
+                            <li>Authenticity, costume, make-up, enactment and overall performance </li>
+
                         </ul>
                     `,
           },
@@ -2795,20 +3193,330 @@
             title: "Coloring Competition Rules",
             content: `
                         <h4>Competition Guidelines:</h4>
+                        <p>Drawing and Painting can be a great podium for children to progress and discover their creativity and aids them to acquire hand eye coordination skills. Heritage festival provides an opportunity to sketch or paint the God of art, Lord Krishna and there by purify your vision.</p>
+                        
+                        <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table> 
+
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
                         <ul>
-                            <li>Time limit: 45 minutes</li>
-                            <li>Pre-drawn outlines provided</li>
-                            <li>Coloring materials: Crayons, colored pencils</li>
-                            <li>Age categories: 3-6, 7-10, 11-14</li>
-                            <li>No digital coloring</li>
+                            <li>Time Duration: 1 hour</li>
+                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
+                            <li>Materials: Participants must bring their own art supplies</li>
+                            <li>Paper will be provided by the organizers</li>
+                            <li>Original artwork only - no copying allowed</li>
+                            <li>Age-appropriate categories will be maintained</li>
                         </ul>
-                        <h4>Themes:</h4>
+                        
+                        <h4>What to Bring:</h4>
                         <ul>
-                            <li>Krishna and friends</li>
-                            <li>Temple architecture</li>
-                            <li>Indian festivals</li>
-                            <li>Nature and animals</li>
+                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
+                            <li>For Painting: Watercolors, brushes, palette</li>
+                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
+                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
+                            <li>All participants must bring their own materials</li>
+                            <li>Basic drawing board or support surface</li>
                         </ul>
+                        
+                        <h4>Judging Criteria:</h4>
+                        <ul>
+                            <li>Creativity and originality (30%)</li>
+                            <li>Technical skill and execution (25%)</li>
+                            <li>Theme adherence (20%)</li>
+                            <li>Color harmony and composition (15%)</li>
+                            <li>Overall presentation (10%)</li>
+                        </ul>
+                    `,
+          },
+          "painting-rules": {
+            title: "Painting Competition Rules",
+            content: `
+                        <h4>Competition Guidelines:</h4>
+                        <p>Drawing and Painting can be a great podium for children to progress and discover their creativity and aids them to acquire hand eye coordination skills. Heritage festival provides an opportunity to sketch or paint the God of art, Lord Krishna and there by purify your vision.</p>
+                        
+                        <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table> 
+
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
+                        <ul>
+                            <li>Time Duration: 1 hour</li>
+                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
+                            <li>Materials: Participants must bring their own art supplies</li>
+                            <li>Paper will be provided by the organizers</li>
+                            <li>Original artwork only - no copying allowed</li>
+                            <li>Age-appropriate categories will be maintained</li>
+                        </ul>
+                        
+                        <h4>What to Bring:</h4>
+                        <ul>
+                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
+                            <li>For Painting: Watercolors, brushes, palette</li>
+                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
+                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
+                            <li>All participants must bring their own materials</li>
+                            <li>Basic drawing board or support surface</li>
+                        </ul>
+                        
+                        <h4>Judging Criteria:</h4>
+                        <ul>
+                            <li>Creativity and originality (30%)</li>
+                            <li>Technical skill and execution (25%)</li>
+                            <li>Theme adherence (20%)</li>
+                            <li>Color harmony and composition (15%)</li>
+                            <li>Overall presentation (10%)</li>
+                        </ul>
+                    `,
+          },
+          "shading-rules": {
+            title: "Pencil Shading Competition Rules",
+            content: `
+                        <h4>Competition Guidelines:</h4>
+                        <p>Drawing and Painting can be a great podium for children to progress and discover their creativity and aids them to acquire hand eye coordination skills. Heritage festival provides an opportunity to sketch or paint the God of art, Lord Krishna and there by purify your vision.</p>
+                        
+                        <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table> 
+
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
+                        <ul>
+                            <li>Time Duration: 1 hour</li>
+                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
+                            <li>Materials: Participants must bring their own art supplies</li>
+                            <li>Paper will be provided by the organizers</li>
+                            <li>Original artwork only - no copying allowed</li>
+                            <li>Age-appropriate categories will be maintained</li>
+                        </ul>
+                        
+                        <h4>What to Bring:</h4>
+                        <ul>
+                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
+                            <li>For Painting: Watercolors, brushes, palette</li>
+                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
+                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
+                            <li>All participants must bring their own materials</li>
+                            <li>Basic drawing board or support surface</li>
+                        </ul>
+                        
+                        <h4>Judging Criteria:</h4>
+                        <ul>
+                            <li>Creativity and originality (30%)</li>
+                            <li>Technical skill and execution (25%)</li>
+                            <li>Theme adherence (20%)</li>
+                            <li>Color harmony and composition (15%)</li>
+                            <li>Overall presentation (10%)</li>
+                        </ul>
+                    `,
+          },
+          "canvas-rules": {
+            title: "Canvas Painting Competition Rules",
+            content: `
+                        <h4>Competition Guidelines:</h4>
+                        <p>Drawing and Painting can be a great podium for children to progress and discover their creativity and aids them to acquire hand eye coordination skills. Heritage festival provides an opportunity to sketch or paint the God of art, Lord Krishna and there by purify your vision.</p>
+                        
+                        <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table> 
+
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
+                        <ul>
+                            <li>Time Duration: 1 hour</li>
+                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
+                            <li>Materials: Participants must bring their own art supplies</li>
+                            <li>Paper will be provided by the organizers</li>
+                            <li>Original artwork only - no copying allowed</li>
+                            <li>Age-appropriate categories will be maintained</li>
+                        </ul>
+                        
+                        <h4>What to Bring:</h4>
+                        <ul>
+                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
+                            <li>For Painting: Watercolors, brushes, palette</li>
+                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
+                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
+                            <li>All participants must bring their own materials</li>
+                            <li>Basic drawing board or support surface</li>
+                        </ul>
+                        
+                        <h4>Judging Criteria:</h4>
+                        <ul>
+                            <li>Creativity and originality (30%)</li>
+                            <li>Technical skill and execution (25%)</li>
+                            <li>Theme adherence (20%)</li>
+                            <li>Color harmony and composition (15%)</li>
+                            <li>Overall presentation (10%)</li>
+                        </ul>
+                  ign: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table> 
+
+     <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING </h4>
+      <h5>Rules</h5>
+                        <ul>
+                            <li>Duration: 2 hrs.</li>
+                            <li>An outline sketch based on a theme from Ramayana, Mahabharata or Bhagavatam will be provided on a drawing sheet of 13.5 X 10.5 inches and the student has to colour it (only for Coloring).</li>
+                            <li>12 x 18 inches canvas board will be provided. </li>
+                            <li>Except drawing sheets & canvas all materials like pens, pencils, color pencils, exam-pads,   crayons, eraser etc., should be brought by the participants.</li>
+                            <li>The painting should be based on a theme from Ramayana, Mahabharata, Bhagavatam.</li>
+                        </ul>
+                        <h4>Judging Criteria: <h4>
+                          <p>Color Combination, Creativity, Neatness and Overall Presentation.</p>
+                        
                     `,
           },
           "painting-rules": {
@@ -2873,21 +3581,56 @@
             title: "Rangoli Competition Rules",
             content: `
                         <h4>Competition Guidelines:</h4>
+                         <h6>Decoration and art is the most practical and popular way to engage in worship of God in all the cultures. Heritage Fest gives you an opportunity to engage your children from a very young age, by giving them an opportunity to colour Krishna’s forms. </h6>
+
+                         <table style="border-collapse: collapse; width: 100%; max-width: 800px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D &amp; E</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance (Bharat Natyam)</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S&amp;G)</td>
+      </tr>
+      </tbody>
+  </table>
+
+
+     <h3>RANGOLI / CREATIVE RANGOLI & VEGETABLE CARVING/ SALAD DECORATION</h3>
                         <ul>
-                            <li>Time limit: 2 hours</li>
-                            <li>Space provided: 4ft x 4ft</li>
-                            <li>Traditional materials encouraged</li>
-                            <li>Flowers, colors, rice allowed</li>
-                            <li>Team of 2-4 members allowed</li>
+                            <li>Duration: 1 1/2hrs</li>
+                            <li>Materials required for the contest should be brought by the students.</li>
+                            <li>Picture for reference is not allowed inside the venue.</li>
+                            <li>Students in a solo & group of 6(max) can participate.</li>
+                            <li>Presentation should consist of: - Name, Class, School/Organization Name and Phone Number.</li>
                         </ul>
-                        <h4>Materials Provided:</h4>
+                        <h4>Detailed rules for each competition:</h4>
+
+                         <h5>Rangoli</h5>
                         <ul>
-                            <li>Basic colored powders</li>
-                            <li>White rangoli powder</li>
-                            <li>Fresh flower petals</li>
+                            <li>•	Cardboard mats (20 X 25 in) will be provided </li>
+                            <li>•	Theme: Krishna/ Peacock / Colors of Indian Culture/ Floral </li>
+                            <li>Presentation should consist of: - Name, Class, School/Organization Name and Phone Number.</li>
                         </ul>
-                        <h4>Theme:</h4>
-                        <p>Festival celebration or spiritual motifs</p>
+
+                         <h5>Rangoli</h5>
+                         <ul>
+                            <li>Decoratives, pulses, grains etc can be used</li>
+                            <li>Cardboard mats (20 X 25 in) will be provided  </li>
+                            <li>Theme: Krishna/ Peacock / Colors of Indian Culture/ Floral </li>
+                            <li>•	Presentation should consist of: - Name, Class, School/Organization Name and Phone Number.</li>
+                        </ul>
+                        <h4>Judging Criteria:</h4>
+                        <p>Creativity, Composition, Visual Appeal, Color Scheme, Neatness and Overall 
+         Presentation.
+</p>
                     `,
           },
         };
