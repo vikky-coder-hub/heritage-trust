@@ -2124,7 +2124,6 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://js.instamojo.com/v1/checkout.js"></script>
     <script>
       // Initialize Swiper
       const swiper = new Swiper(".hero-slider", {
@@ -2173,12 +2172,14 @@
       }
 
       function registerForEvent(eventType, registrationType) {
-        // Special pricing for Bharatnatyam (meets Instamojo minimum ₹9 requirement)
+        // Razorpay pricing: ₹200 for Solo, ₹300 for Group
         let price;
-        if (eventType === "bharatnatyam") {
-          price = registrationType === "solo" ? 10 : 20;
+        if (registrationType === "solo") {
+          price = 200; // ₹200 for Solo
+        } else if (registrationType === "group") {
+          price = 300; // ₹300 for Group
         } else {
-          price = registrationType === "solo" ? 1 : 2;
+          price = 200; // Default to Solo pricing
         }
 
         const eventName = eventType.replace("-", " ");
@@ -2256,7 +2257,7 @@
                     padding: 0.75rem 2rem; background: #FF6B35; color: white; 
                     border: none; border-radius: 5px; cursor: pointer; flex: 1;
                     font-size: 1rem; font-weight: bold;
-                  ">Pay ₹${price} with Instamojo</button>
+                  ">Pay ₹${price} with Razorpay</button>
                 </div>
               </form>
             </div>
@@ -2313,8 +2314,8 @@
               }
             }
 
-            // Create payment with Instamojo
-            createInstamojoPayment(
+            // Create payment with Razorpay
+            createRazorpayPayment(
               eventType,
               registrationType,
               price,
@@ -2328,85 +2329,78 @@
         if (form) form.remove();
       }
 
-      // Configure Instamojo Seamless Checkout
-      Instamojo.configure({
-        handlers: {
-          onOpen: function () {
-            console.log("Payment modal opened");
-          },
-          onClose: function () {
-            console.log("Payment modal closed");
-          },
-          onSuccess: async function (response) {
-            console.log("Payment Success:", response);
+      // Razorpay Payment Success Handler
+      async function handlePaymentSuccess(response) {
+        console.log("Payment Success:", response);
 
-            // Store payment success info
-            const registrationData = JSON.parse(
-              localStorage.getItem("heritage_fest_temp_registration") || "{}"
-            );
-            registrationData.payment_id = response.payment_id;
-            registrationData.payment_request_id = response.payment_request_id;
-            registrationData.payment_status = "success";
-            registrationData.timestamp = new Date().toISOString();
+        // Store payment success info
+        const registrationData = JSON.parse(
+          localStorage.getItem("heritage_fest_temp_registration") || "{}"
+        );
+        registrationData.payment_id = response.razorpay_payment_id;
+        registrationData.order_id = response.razorpay_order_id;
+        registrationData.signature = response.razorpay_signature;
+        registrationData.payment_status = "success";
+        registrationData.timestamp = new Date().toISOString();
 
-            // Save registration data to backend
-            try {
-              const saveResponse = await fetch("/api/save-registration", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(registrationData),
-              });
+        // Save registration data to backend
+        try {
+          const saveResponse = await fetch("/api/save-registration", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(registrationData),
+          });
 
-              if (saveResponse.ok) {
-                console.log("✅ Registration data saved to server");
-              } else {
-                console.error("❌ Failed to save registration data to server");
-              }
-            } catch (error) {
-              console.error("❌ Error saving registration data:", error);
-            }
+          if (saveResponse.ok) {
+            console.log("✅ Registration data saved to server");
+          } else {
+            console.error("❌ Failed to save registration data to server");
+          }
+        } catch (error) {
+          console.error("❌ Error saving registration data:", error);
+        }
 
-            localStorage.setItem(
-              "heritage_fest_registration",
-              JSON.stringify(registrationData)
-            );
-            localStorage.removeItem("heritage_fest_temp_registration");
+        localStorage.setItem(
+          "heritage_fest_registration",
+          JSON.stringify(registrationData)
+        );
+        localStorage.removeItem("heritage_fest_temp_registration");
 
-            // Close the registration form if it's still open
-            closeParticipantForm();
+        // Close the registration form if it's still open
+        closeParticipantForm();
 
-            // Show success message
-            alert(
-              `🎉 Payment Successful!\\n\\nThank you ${registrationData.name} for registering for Heritage Fest 2025!\\n\\nEvent: ${registrationData.eventType} (${registrationData.registrationType})\\nAmount: ₹${registrationData.price}\\n\\nPayment ID: ${response.payment_id}\\n\\nYou'll receive confirmation details on your email: ${registrationData.email}`
-            );
-          },
-          onFailure: function (response) {
-            console.log("Payment Failed:", response);
+        // Show success message
+        alert(
+          `🎉 Payment Successful!\\n\\nThank you ${registrationData.name} for registering for Heritage Fest 2025!\\n\\nEvent: ${registrationData.eventType} (${registrationData.registrationType})\\nAmount: ₹${registrationData.price}\\n\\nPayment ID: ${response.razorpay_payment_id}\\n\\nYou'll receive confirmation details on your email: ${registrationData.email}`
+        );
+      }
 
-            // Re-enable the payment button
-            const submitBtn = document.querySelector(
-              '#registration-form button[type="submit"]'
-            );
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.innerHTML = `Pay ₹${
-                JSON.parse(
-                  localStorage.getItem("heritage_fest_temp_registration") ||
-                    "{}"
-                ).price || 0
-              } with Instamojo`;
-            }
+      // Razorpay Payment Failure Handler
+      function handlePaymentFailure(error) {
+        console.log("Payment Failed:", error);
 
-            alert(
-              "Payment failed. Please try again or contact us at +91 97550 98618"
-            );
-          },
-        },
-      });
+        // Re-enable the payment button
+        const submitBtn = document.querySelector(
+          '#registration-form button[type="submit"]'
+        );
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `Pay ₹${
+            JSON.parse(
+              localStorage.getItem("heritage_fest_temp_registration") ||
+                "{}"
+            ).price || 0
+          } with Razorpay`;
+        }
 
-      async function createInstamojoPayment(
+        alert(
+          "Payment failed. Please try again or contact us at +91 97550 98618"
+        );
+      }
+
+      async function createRazorpayPayment(
         eventType,
         registrationType,
         price,
@@ -2437,7 +2431,7 @@
         );
 
         try {
-          // Create payment request on your backend
+          // Create Razorpay order on your backend
           const response = await fetch("/api/create-payment", {
             method: "POST",
             headers: {
@@ -2452,7 +2446,7 @@
               buyer_name: formData.get("name"),
               buyer_email: formData.get("email"),
               buyer_phone: formData.get("phone"),
-              redirect_url: window.location.origin,
+              registration_type: registrationType,
             }),
           });
 
@@ -2461,30 +2455,58 @@
           }
 
           const result = await response.json();
-          console.log("Payment response:", result);
+          console.log("Razorpay order response:", result);
 
-          if (result.paymentUrl) {
-            // Use Instamojo Seamless Checkout
-            Instamojo.open(result.paymentUrl);
+          if (result.success && result.order_id) {
+            // Configure Razorpay options
+            const options = {
+              key: result.key_id,
+              amount: result.amount * 100, // Amount in paise
+              currency: result.currency,
+              name: "Heritage Fest 2025",
+              description: result.purpose,
+              order_id: result.order_id,
+              handler: function (response) {
+                handlePaymentSuccess(response);
+              },
+              prefill: {
+                name: result.buyer_name,
+                email: result.buyer_email,
+                contact: result.buyer_phone,
+              },
+              notes: {
+                event_type: eventType,
+                registration_type: registrationType,
+              },
+              theme: {
+                color: "#b6854d",
+              },
+              modal: {
+                ondismiss: function () {
+                  handlePaymentFailure({ error: "Payment cancelled by user" });
+                },
+              },
+            };
+
+            // Open Razorpay checkout
+            const rzp = new Razorpay(options);
+            rzp.open();
           } else {
-            throw new Error("Payment URL not received from server.");
+            throw new Error("Failed to create Razorpay order");
           }
         } catch (error) {
           console.error("Payment creation failed:", error);
-
-          // Fallback: Use direct Instamojo link for this event
-          const directLink = `https://www.instamojo.com/@heritagefest2025/`;
+          
           alert(
-            `Server temporarily unavailable. Opening direct payment link.\\n\\nEvent: ${tempRegistrationData.eventType} (${registrationType})\\nAmount: ₹${price}\\n\\nPlease complete payment and contact us at +91 97550 98618 with your details.`
+            `Payment initialization failed. Please try again or contact us at +91 97550 98618.\\n\\nError: ${error.message}`
           );
-
-          // Open fallback link
-          Instamojo.open(directLink);
+          
+          handlePaymentFailure(error);
         } finally {
           // Re-enable button in case of error
           if (document.getElementById("participant-form")) {
             submitBtn.disabled = false;
-            submitBtn.innerHTML = `Pay ₹${price} with Instamojo`;
+            submitBtn.innerHTML = `Pay ₹${price} with Razorpay`;
           }
         }
       }
@@ -2967,7 +2989,7 @@
         });
     </script>
 
-    <!-- Instamojo Seamless Checkout Script -->
-    <script src="https://js.instamojo.com/v1/checkout.js"></script>
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   </body>
 </html>

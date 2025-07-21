@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
 const path = require("path");
-const qs = require("qs");
 const fs = require("fs");
 const nodemailer = require("nodemailer");
+const Razorpay = require("razorpay");
 
 // Load environment variables
 require("dotenv").config();
@@ -12,17 +11,22 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Instamojo credentials from environment variables
-const INSTAMOJO_API_KEY = process.env.INSTAMOJO_API_KEY;
-const INSTAMOJO_AUTH_TOKEN = process.env.INSTAMOJO_AUTH_TOKEN;
-const INSTAMOJO_BASE_URL = process.env.INSTAMOJO_BASE_URL || "https://www.instamojo.com/api/1.1/";
+// Razorpay credentials from environment variables
+const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
+const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
 
 // Validate required environment variables
-if (!INSTAMOJO_API_KEY || !INSTAMOJO_AUTH_TOKEN) {
-  console.error("❌ Missing required environment variables: INSTAMOJO_API_KEY or INSTAMOJO_AUTH_TOKEN");
+if (!RAZORPAY_KEY_ID || !RAZORPAY_KEY_SECRET) {
+  console.error("❌ Missing required environment variables: RAZORPAY_KEY_ID or RAZORPAY_KEY_SECRET");
   console.error("Please check your .env file");
   process.exit(1);
 }
+
+// Initialize Razorpay instance
+const razorpay = new Razorpay({
+  key_id: RAZORPAY_KEY_ID,
+  key_secret: RAZORPAY_KEY_SECRET,
+});
 
 // Middleware
 app.use(cors());
@@ -32,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files (your HTML, CSS, JS)
 app.use(express.static(path.join(__dirname)));
 
-// Create payment request
+// Create Razorpay order
 app.post("/api/create-payment", async (req, res) => {
   try {
     const {
@@ -41,7 +45,7 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_name,
       buyer_email,
       buyer_phone,
-      redirect_url,
+      registration_type,
     } = req.body;
 
     // Input validation
@@ -70,100 +74,69 @@ app.post("/api/create-payment", async (req, res) => {
       });
     }
 
-    // Validate amount (minimum ₹1, maximum ₹10000)
-    const numAmount = parseFloat(amount);
-    if (isNaN(numAmount) || numAmount < 1 || numAmount > 10000) {
+    // Set pricing based on registration type
+    let finalAmount;
+    if (registration_type === "solo") {
+      finalAmount = 200; // ₹200 for Solo
+    } else if (registration_type === "group") {
+      finalAmount = 300; // ₹300 for Group
+    } else {
+      // Fallback to provided amount if registration_type not specified
+      finalAmount = parseFloat(amount);
+    }
+
+    // Validate amount
+    if (isNaN(finalAmount) || finalAmount < 1 || finalAmount > 10000) {
       return res.status(400).json({
         success: false,
         error: "Amount must be between ₹1 and ₹10000"
       });
     }
 
-    console.log("Creating payment request:", {
-      amount: numAmount,
+    console.log("Creating Razorpay order:", {
+      amount: finalAmount,
       purpose,
       buyer_name,
       buyer_email,
       buyer_phone,
+      registration_type,
     });
 
-    const paymentData = {
-      purpose: purpose,
-      amount: amount,
-      buyer_name: buyer_name,
-      email: buyer_email, // Instamojo API v1.1 uses 'email' not 'buyer_email'
-      phone: buyer_phone, // Instamojo API v1.1 uses 'phone' not 'buyer_phone'
-      redirect_url: redirect_url || `http://localhost:${PORT}/payment-success`,
-      send_email: "True", // Must be a string 'True' or 'False'
-      send_sms: "True", // Must be a string 'True' or 'False'
-      allow_repeated_payments: false,
+    // Create Razorpay order
+    const options = {
+      amount: finalAmount * 100, // Razorpay expects amount in paise (multiply by 100)
+      currency: "INR",
+      receipt: `receipt_${Date.now()}`,
+      notes: {
+        purpose: purpose,
+        buyer_name: buyer_name,
+        buyer_email: buyer_email,
+        buyer_phone: buyer_phone,
+        registration_type: registration_type || "solo",
+      },
     };
 
-    const response = await axios.post(
-      "https://www.instamojo.com/api/1.1/payment-requests/",
-      qs.stringify(paymentData),
-      {
-        headers: {
-          "X-Api-Key": INSTAMOJO_API_KEY,
-          "X-Auth-Token": INSTAMOJO_AUTH_TOKEN,
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
-    );
+    const order = await razorpay.orders.create(options);
 
-    if (response.data.success) {
-      const paymentUrl = response.data.payment_request.longurl;
-      res.json({ paymentUrl });
-    } else {
-      // Handle API-level errors (e.g., validation errors)
-      console.error("Instamojo API Error:", response.data);
-      res.status(400).json({
-        success: false,
-        error: "Instamojo API returned an error",
-        details: response.data,
-      });
-    }
+    res.json({
+      success: true,
+      order_id: order.id,
+      amount: finalAmount,
+      currency: order.currency,
+      key_id: RAZORPAY_KEY_ID, // Send key_id to frontend
+      buyer_name,
+      buyer_email,
+      buyer_phone,
+      purpose,
+    });
+
   } catch (error) {
-    const errorCode = error.code;
-    const errorResponseData = error.response ? error.response.data : null;
-    const errorMessage = error.message;
-
-    console.error(
-      `Caught Error (${errorCode || "N/A"}):`,
-      errorResponseData || errorMessage
-    );
-
-    // Fallback for specific network errors
-    if (
-      errorCode === "ECONNRESET" ||
-      errorCode === "ENOTFOUND" ||
-      errorCode === "ETIMEDOUT"
-    ) {
-      console.log(
-        "Connection error detected, providing fallback payment link."
-      );
-
-      const { amount, purpose, buyer_name, buyer_email } = req.body;
-
-      // Create a manual payment link
-      const fallbackURL = `https://www.instamojo.com/@heritagefest2025/?data_name=${encodeURIComponent(
-        buyer_name
-      )}&data_email=${encodeURIComponent(buyer_email)}&data_amount=${amount}`;
-
-      res.json({
-        paymentUrl: fallbackURL,
-        fallback: true,
-        message:
-          "Using fallback payment method due to API connectivity issues.",
-      });
-    } else {
-      // Handle other errors (including API errors that throw, e.g. 401 Unauthorized)
-      res.status(500).json({
-        success: false,
-        error: "Server error while creating payment",
-        details: errorResponseData || errorMessage,
-      });
-    }
+    console.error("Razorpay order creation failed:", error);
+    res.status(500).json({
+      success: false,
+      error: "Failed to create payment order",
+      details: error.message,
+    });
   }
 });
 
@@ -411,7 +384,7 @@ app.listen(PORT, () => {
   );
   console.log(`📱 Your website is available at: http://localhost:${PORT}`);
   console.log(
-    `💳 Payment API endpoint: http://localhost:${PORT}/api/create-payment`
+    `💳 Razorpay API endpoint: http://localhost:${PORT}/api/create-payment`
   );
   console.log("");
   console.log("🔥 Ready to accept payments!");
