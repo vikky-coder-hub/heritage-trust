@@ -305,6 +305,101 @@
         );
       }
 
+      /* Cultural Education Services Section */
+      .ces-section {
+        background-color: var(--background-color);
+        padding: 4rem 0;
+      }
+
+      .ces-content {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: justify;
+      }
+
+      .ces-description {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-color);
+      }
+
+      /* Guidelines Section */
+      .guidelines-section {
+        background-color: var(--light-gray);
+        padding: 4rem 0;
+      }
+
+      .guidelines-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .guidelines-box {
+        background-color: var(--background-color);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .guidelines-box h3 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+      }
+
+      .guidelines-box ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .guidelines-box li {
+        margin-bottom: 1rem;
+        position: relative;
+        padding-left: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .guidelines-box li:before {
+        content: "•";
+        color: var(--primary-color);
+        position: absolute;
+        left: 0;
+        font-size: 1.2rem;
+      }
+
+      .important-note {
+        grid-column: 1 / -1;
+        background-color: var(--primary-color);
+        color: var(--background-color);
+      }
+
+      .important-note h3 {
+        color: var(--background-color);
+      }
+
+      .important-note p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      @media (max-width: 768px) {
+        .guidelines-content {
+          grid-template-columns: 1fr;
+        }
+
+        .guidelines-box {
+          padding: 1.5rem;
+        }
+
+        .ces-description {
+          font-size: 1rem;
+          padding: 0 1rem;
+        }
+      }
+      }
+
       .events-tabs {
         display: flex;
         justify-content: center;
@@ -1272,6 +1367,56 @@
       </div>
     </section>
 
+    <!-- Cultural Education Services -->
+    <section id="ces" class="section ces-section">
+      <div class="container">
+        <h2 class="section-title">Cultural Education Services</h2>
+        <div class="ces-content">
+          <p class="ces-description">
+            One of the primary purposes of Hare Krishna Movement is to propagate spiritual and cultural knowledge to society at large and to educate all people in relevant techniques to check the imbalance of values in life and to achieve real unity and peace in the world. Towards achieving this objective, Hare Krishna Movement, Bhilai created the Cultural Education Services (CES) in 2011, specifically aimed at enhancing values and life skills in children through culture-related activities. CES department has multiple culture-centric initiatives providing systematic, intensive and performance-oriented training in various art forms even as equipping children with essential life skills.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guidelines Section -->
+    <section id="guidelines" class="section guidelines-section">
+      <div class="container">
+        <h2 class="section-title">Guidelines & Information</h2>
+        <div class="guidelines-content">
+          <div class="guidelines-box">
+            <h3>Guidelines to Participants</h3>
+            <ul>
+              <li>Students may participate in as many events as they like.</li>
+              <li>Please bring your Token ID card with ID number that is given by your school teacher to the event without fail.</li>
+              <li>Last date for submission of entries is August 5th 2025</li>
+              <li>The stage dimension for the entire contest is 18 X 36 feet. Students are requested to practice accordingly.</li>
+              <li>Late comers will not be entertained.</li>
+              <li>The decision of judges for all the contests will be final.</li>
+            </ul>
+          </div>
+
+          <div class="guidelines-box">
+            <h3>Results and Awards</h3>
+            <ul>
+              <li>Attractive prizes to winners in the finals will be given away in a grand prize distribution ceremony at Hare Krishna Movement, Bhilai.</li>
+              <li>Parents and teachers are also welcome to this ceremony.</li>
+              <li>Special prizes will be given to the top 3 schools and to the teachers who have trained the prize-winning students.</li>
+              <li>The Rolling Trophy will be awarded to the school with the maximum number of entries in each event and will be performance based.</li>
+              <li>Results will be announced on the school display board.</li>
+              <li>Phone calls, e-mails or personal visits to know the results will strictly not be entertained.</li>
+              <li>The decision of the judges will be final and binding.</li>
+            </ul>
+          </div>
+
+          <div class="guidelines-box important-note">
+            <h3>Important Note</h3>
+            <p>Prasadam will be distributed to all the participants in venue. Non-vegetarian foods, including eggs, are strictly not allowed inside the premises during the Heritage Fest event.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Events Section -->
     <section id="events" class="section events-section">
       <div class="container">
@@ -1337,13 +1482,13 @@
                     class="option-btn"
                     onclick="registerForEvent('bharatnatyam', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('bharatnatyam', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1369,13 +1514,13 @@
                     class="option-btn"
                     onclick="registerForEvent('classical', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('classical', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1405,13 +1550,13 @@
                     class="option-btn"
                     onclick="registerForEvent('semi-classical', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('semi-classical', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1439,13 +1584,13 @@
                     class="option-btn"
                     onclick="registerForEvent('light-dance', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('light-dance', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1490,13 +1635,13 @@
                     class="option-btn"
                     onclick="registerForEvent('gita', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('gita', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1525,7 +1670,7 @@
                     onclick="registerForEvent('keyboard', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1554,7 +1699,7 @@
                     onclick="registerForEvent('percussion', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1580,13 +1725,13 @@
                     class="option-btn"
                     onclick="registerForEvent('vocal', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('vocal', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
@@ -1632,7 +1777,7 @@
                     onclick="registerForEvent('rhymes', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1659,7 +1804,7 @@
                     onclick="registerForEvent('story', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1705,7 +1850,7 @@
                     onclick="registerForEvent('costume', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1751,7 +1896,7 @@
                     onclick="registerForEvent('coloring', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1778,7 +1923,7 @@
                     onclick="registerForEvent('painting', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1805,7 +1950,7 @@
                     onclick="registerForEvent('shading', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1832,7 +1977,7 @@
                     onclick="registerForEvent('canvas', 'solo')"
                     style="width: 100%">
                     Solo Registration
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                 </div>
               </div>
@@ -1877,13 +2022,13 @@
                     class="option-btn"
                     onclick="registerForEvent('rangoli', 'solo')">
                     Solo
-                    <div class="price-info">₹1</div>
+                    <div class="price-info">₹200</div>
                   </div>
                   <div
                     class="option-btn"
                     onclick="registerForEvent('rangoli', 'group')">
                     Group
-                    <div class="price-info">₹2</div>
+                    <div class="price-info">₹300</div>
                   </div>
                 </div>
               </div>
