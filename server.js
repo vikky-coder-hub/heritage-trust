@@ -46,7 +46,6 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_email,
       buyer_phone,
       registration_type,
-      participant_details
     } = req.body;
 
     // Input validation
@@ -95,45 +94,20 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_email,
       buyer_phone,
       registration_type,
-      participant_details
     });
-
-    // Create comprehensive notes object for Razorpay
-    const razorpayNotes = {
-      // Basic info
-      purpose: purpose,
-      buyer_name: buyer_name,
-      buyer_email: buyer_email,
-      buyer_phone: buyer_phone,
-      registration_type: registration_type || "solo",
-      registration_fee: finalAmount,
-      
-      // Participant details (if provided)
-      ...(participant_details && {
-        full_name: participant_details.full_name,
-        class_sections: participant_details.class_sections,
-        school_organization: participant_details.school_organization,
-        date_of_birth: participant_details.date_of_birth,
-        age: participant_details.age,
-        guru_name: participant_details.guru_name,
-        guru_contact: participant_details.guru_contact,
-        parents_name: participant_details.parents_name,
-        parents_occupation: participant_details.parents_occupation,
-        parents_contact: participant_details.parents_contact,
-        occupation: participant_details.occupation,
-        address: participant_details.address,
-        group_members: participant_details.group_members,
-        event_type: participant_details.event_type,
-        registration_timestamp: new Date().toISOString()
-      })
-    };
 
     // Create Razorpay order
     const options = {
       amount: finalAmount * 100, // Razorpay expects amount in paise (multiply by 100)
       currency: "INR",
-      receipt: `heritage_fest_${Date.now()}`,
-      notes: razorpayNotes,
+      receipt: `receipt_${Date.now()}`,
+      notes: {
+        purpose: purpose,
+        buyer_name: buyer_name,
+        buyer_email: buyer_email,
+        buyer_phone: buyer_phone,
+        registration_type: registration_type || "solo",
+      },
     };
 
     const order = await razorpay.orders.create(options);

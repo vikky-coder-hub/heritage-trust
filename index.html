@@ -2838,27 +2838,6 @@
                 buyer_email: formData.get("email"),
                 buyer_phone: formData.get("phone"),
                 registration_type: registrationType,
-                // All registration form details
-                participant_details: {
-                  full_name: formData.get("name"),
-                  class_sections: formData.get("Class & Sections"),
-                  email: formData.get("email"),
-                  school_organization: formData.get("School/Institutute/Organization"),
-                  phone: formData.get("phone"),
-                  date_of_birth: formData.get("Date o birth"),
-                  age: formData.get("age"),
-                  guru_name: formData.get("Guru Name"),
-                  guru_contact: formData.get("Guru Contact no"),
-                  parents_name: formData.get("Parents Name"),
-                  parents_occupation: formData.get("Parents Occupation"),
-                  parents_contact: formData.get("Parents contact number"),
-                  occupation: formData.get("Occupation"),
-                  address: formData.get("address") || "",
-                  group_members: formData.get("members") || "",
-                  event_type: eventType,
-                  registration_type: registrationType,
-                  registration_fee: price
-                }
               }),
             }
           );
