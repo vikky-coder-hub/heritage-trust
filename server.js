@@ -74,18 +74,12 @@ app.post("/api/create-payment", async (req, res) => {
       });
     }
 
-    // Set pricing based on registration type
-    let finalAmount;
-    if (registration_type === "solo") {
-      finalAmount = 200; // ₹200 for Solo
-    } else if (registration_type === "group") {
-      finalAmount = 300; // ₹300 for Group
-    } else {
-      // Fallback to provided amount if registration_type not specified
-      finalAmount = parseFloat(amount);
-    }
-
-    // Validate amount
+    // Use the amount sent from frontend (dynamic pricing)
+    let finalAmount = parseFloat(amount);
+    
+    console.log("💰 Received amount from frontend:", amount, "→ Parsed:", finalAmount);
+    
+    // Validate that the amount is reasonable
     if (isNaN(finalAmount) || finalAmount < 1 || finalAmount > 10000) {
       return res.status(400).json({
         success: false,
