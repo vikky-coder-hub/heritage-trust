@@ -46,7 +46,6 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_email,
       buyer_phone,
       registration_type,
-      participant_details,
     } = req.body;
 
     // Input validation
@@ -79,7 +78,6 @@ app.post("/api/create-payment", async (req, res) => {
     let finalAmount = parseFloat(amount);
     
     console.log("💰 Received amount from frontend:", amount, "→ Parsed:", finalAmount);
-    console.log("📝 Received participant details:", participant_details);
     
     // Validate that the amount is reasonable
     if (isNaN(finalAmount) || finalAmount < 1 || finalAmount > 10000) {
@@ -96,44 +94,20 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_email,
       buyer_phone,
       registration_type,
-      participant_details,
     });
-
-    // Prepare comprehensive notes object for Razorpay
-    const razorpayNotes = {
-      purpose: purpose,
-      buyer_name: buyer_name,
-      buyer_email: buyer_email,
-      buyer_phone: buyer_phone,
-      registration_type: registration_type || "solo",
-      ...(participant_details && {
-        full_name: participant_details.full_name,
-        class_sections: participant_details.class_sections,
-        school_organization: participant_details.school_organization,
-        date_of_birth: participant_details.date_of_birth,
-        age: participant_details.age,
-        guru_name: participant_details.guru_name,
-        guru_contact: participant_details.guru_contact,
-        parent_name: participant_details.parent_name,
-        parent_occupation: participant_details.parent_occupation,
-        parent_contact: participant_details.parent_contact,
-        occupation: participant_details.occupation,
-        address: participant_details.address,
-        group_members: participant_details.group_members,
-        event: participant_details.event,
-        category: participant_details.category,
-        type: participant_details.type,
-        contact_no: participant_details.contact_no,
-        guru_contact_no: participant_details.guru_contact_no,
-      }),
-    };
 
     // Create Razorpay order
     const options = {
       amount: finalAmount * 100, // Razorpay expects amount in paise (multiply by 100)
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
-      notes: razorpayNotes,
+      notes: {
+        purpose: purpose,
+        buyer_name: buyer_name,
+        buyer_email: buyer_email,
+        buyer_phone: buyer_phone,
+        registration_type: registration_type || "solo",
+      },
     };
 
     const order = await razorpay.orders.create(options);
