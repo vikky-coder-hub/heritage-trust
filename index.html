@@ -2812,8 +2812,33 @@
         );
 
         try {
+          // Collect ALL form data for Razorpay notes
+          const allFormData = {
+            full_name: formData.get("name"),
+            class_sections: formData.get("class"),
+            email: formData.get("email"),
+            school_organization: formData.get("school"),
+            phone: formData.get("phone"),
+            date_of_birth: formData.get("dob"),
+            age: formData.get("age"),
+            guru_name: formData.get("guru-name"),
+            guru_contact: formData.get("guru-contact"),
+            parent_name: formData.get("parent-name"),
+            parent_occupation: formData.get("parent-occupation"),
+            parent_contact: formData.get("parent-contact"),
+            occupation: formData.get("occupation"),
+            address: formData.get("address"),
+            group_members: formData.get("members") || "",
+            event: eventType.replace("-", " "),
+            category: registrationType,
+            type: registrationType,
+            contact_no: formData.get("phone"),
+            guru_contact_no: formData.get("guru-contact")
+          };
+
           // Create Razorpay order on your backend
           console.log("🚀 Sending payment request with amount:", price, "for event:", eventType);
+          console.log("📝 Sending comprehensive form data:", allFormData);
           const response = await fetch(
             "https://heritage-trust.vercel.app/api/create-payment",
             {
@@ -2831,6 +2856,7 @@
                 buyer_email: formData.get("email"),
                 buyer_phone: formData.get("phone"),
                 registration_type: registrationType,
+                participant_details: allFormData
               }),
             }
           );
