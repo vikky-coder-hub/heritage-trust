@@ -39,8 +39,6 @@ app.use(express.static(path.join(__dirname)));
 // Create Razorpay order
 app.post("/api/create-payment", async (req, res) => {
   try {
-    console.log("📥 Received payment request:", req.body);
-    
     const {
       amount,
       purpose,
@@ -48,12 +46,10 @@ app.post("/api/create-payment", async (req, res) => {
       buyer_email,
       buyer_phone,
       registration_type,
-      participant_details,
     } = req.body;
 
     // Input validation
     if (!amount || !purpose || !buyer_name || !buyer_email || !buyer_phone) {
-      console.log("❌ Validation failed: Missing required fields");
       return res.status(400).json({
         success: false,
         error: "Missing required fields: amount, purpose, buyer_name, buyer_email, buyer_phone"
@@ -63,7 +59,6 @@ app.post("/api/create-payment", async (req, res) => {
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(buyer_email)) {
-      console.log("❌ Validation failed: Invalid email format");
       return res.status(400).json({
         success: false,
         error: "Invalid email format"
@@ -73,7 +68,6 @@ app.post("/api/create-payment", async (req, res) => {
     // Validate phone number (10 digits)
     const phoneRegex = /^[0-9]{10}$/;
     if (!phoneRegex.test(buyer_phone)) {
-      console.log("❌ Validation failed: Invalid phone number");
       return res.status(400).json({
         success: false,
         error: "Phone number must be 10 digits"
@@ -84,11 +78,9 @@ app.post("/api/create-payment", async (req, res) => {
     let finalAmount = parseFloat(amount);
     
     console.log("💰 Received amount from frontend:", amount, "→ Parsed:", finalAmount);
-    console.log("📝 Received participant details:", participant_details);
     
     // Validate that the amount is reasonable
     if (isNaN(finalAmount) || finalAmount < 1 || finalAmount > 10000) {
-      console.log("❌ Validation failed: Invalid amount");
       return res.status(400).json({
         success: false,
         error: "Amount must be between ₹1 and ₹10000"
@@ -104,51 +96,21 @@ app.post("/api/create-payment", async (req, res) => {
       registration_type,
     });
 
-    // Prepare comprehensive notes object for Razorpay (optimized for Razorpay limits)
-    const razorpayNotes = {
-      purpose: purpose,
-      name: buyer_name,
-      email: buyer_email,
-      phone: buyer_phone,
-      type: registration_type || "solo",
-    };
-
-    // Add participant details if available (with string length limits)
-    if (participant_details) {
-      // Basic participant info
-      if (participant_details.full_name) razorpayNotes.full_name = String(participant_details.full_name).substring(0, 100);
-      if (participant_details.class_sections) razorpayNotes.class = String(participant_details.class_sections).substring(0, 50);
-      if (participant_details.school_organization) razorpayNotes.school = String(participant_details.school_organization).substring(0, 100);
-      if (participant_details.age) razorpayNotes.age = String(participant_details.age);
-      if (participant_details.address) razorpayNotes.address = String(participant_details.address).substring(0, 200);
-      
-      // Guru details - PRIORITY FIELDS
-      if (participant_details.guru_name) razorpayNotes.guru_name = String(participant_details.guru_name).substring(0, 100);
-      if (participant_details.guru_contact) razorpayNotes.guru_contact = String(participant_details.guru_contact).substring(0, 15);
-      
-      // Father/Parent details - PRIORITY FIELDS
-      if (participant_details.parent_name) razorpayNotes.father_name = String(participant_details.parent_name).substring(0, 100);
-      if (participant_details.parent_contact) razorpayNotes.father_contact = String(participant_details.parent_contact).substring(0, 15);
-      if (participant_details.parent_occupation) razorpayNotes.father_occupation = String(participant_details.parent_occupation).substring(0, 100);
-      
-      // Event and group details
-      if (participant_details.event) razorpayNotes.event = String(participant_details.event).substring(0, 100);
-      if (participant_details.group_members) razorpayNotes.group_members = String(participant_details.group_members).substring(0, 300);
-    }
-
-    console.log("📝 Final Razorpay Notes:", razorpayNotes);
-
     // Create Razorpay order
     const options = {
       amount: finalAmount * 100, // Razorpay expects amount in paise (multiply by 100)
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
-      notes: razorpayNotes,
+      notes: {
+        purpose: purpose,
+        buyer_name: buyer_name,
+        buyer_email: buyer_email,
+        buyer_phone: buyer_phone,
+        registration_type: registration_type || "solo",
+      },
     };
 
-    console.log("🚀 Creating Razorpay order with options:", options);
     const order = await razorpay.orders.create(options);
-    console.log("✅ Razorpay order created successfully:", order.id);
 
     res.json({
       success: true,
@@ -163,23 +125,11 @@ app.post("/api/create-payment", async (req, res) => {
     });
 
   } catch (error) {
-    console.error("💥 Razorpay order creation failed:", error);
-    console.error("💥 Error details:", {
-      message: error.message,
-      stack: error.stack,
-      statusCode: error.statusCode,
-      code: error.code
-    });
-    
-    // Return appropriate error response
-    const statusCode = error.statusCode || 500;
-    const errorMessage = error.message || "Failed to create payment order";
-    
-    res.status(statusCode).json({
+    console.error("Razorpay order creation failed:", error);
+    res.status(500).json({
       success: false,
       error: "Failed to create payment order",
-      details: errorMessage,
-      timestamp: new Date().toISOString()
+      details: error.message,
     });
   }
 });

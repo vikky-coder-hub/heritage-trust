@@ -4,17 +4,15 @@ A complete event registration and payment system for Heritage Fest 2025 cultural
 
 ## Features
 - 🎭 14 Competition Categories (Dance, Music, Art, Literature, Theatre)
-- 💳 Razorpay Payment Integration
+- 💳 Instamojo Payment Integration
 - 📱 Mobile Responsive Design
 - 🔒 Secure Registration Data Storage
 - ✅ Form Validation & Error Handling
-- 💰 Dynamic Pricing (₹150/₹200/₹300)
-- 📊 Comprehensive Data Collection in Razorpay Notes
 
 ## Tech Stack
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
 - **Backend**: Node.js, Express.js
-- **Payment**: Razorpay API (Live Mode)
+- **Payment**: Instamojo API
 - **Deployment**: Vercel
 
 ## Local Development
@@ -24,8 +22,9 @@ npm start
 ```
 
 ## Environment Variables Required
-- RAZORPAY_KEY_ID
-- RAZORPAY_KEY_SECRET
+- INSTAMOJO_API_KEY
+- INSTAMOJO_AUTH_TOKEN
+- INSTAMOJO_BASE_URL
 - FRONTEND_URL
 - PAYMENT_SUCCESS_URL
 - PAYMENT_FAILURE_URL
