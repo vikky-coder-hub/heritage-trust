@@ -2725,7 +2725,7 @@
         // Save registration data to backend
         try {
           const saveResponse = await fetch(
-            "https://heritage-trust-delta.vercel.app/api/save-registration",
+            "https://heritage-trust.vercel.app/api/save-registration",
             {
               method: "POST",
               headers: {
@@ -2815,7 +2815,7 @@
           // Create Razorpay order on your backend
           console.log("🚀 Sending payment request with amount:", price, "for event:", eventType);
           const response = await fetch(
-            "https://heritage-trust-delta.vercel.app/api/create-payment",
+            "https://heritage-trust.vercel.app/api/create-payment",
             {
               method: "POST",
               headers: {
