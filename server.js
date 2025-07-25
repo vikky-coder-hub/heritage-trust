@@ -115,17 +115,25 @@ app.post("/api/create-payment", async (req, res) => {
 
     // Add participant details if available (with string length limits)
     if (participant_details) {
+      // Basic participant info
       if (participant_details.full_name) razorpayNotes.full_name = String(participant_details.full_name).substring(0, 100);
       if (participant_details.class_sections) razorpayNotes.class = String(participant_details.class_sections).substring(0, 50);
       if (participant_details.school_organization) razorpayNotes.school = String(participant_details.school_organization).substring(0, 100);
       if (participant_details.age) razorpayNotes.age = String(participant_details.age);
-      if (participant_details.guru_name) razorpayNotes.guru_name = String(participant_details.guru_name).substring(0, 100);
-      if (participant_details.guru_contact) razorpayNotes.guru_phone = String(participant_details.guru_contact).substring(0, 15);
-      if (participant_details.parent_name) razorpayNotes.parent_name = String(participant_details.parent_name).substring(0, 100);
-      if (participant_details.parent_contact) razorpayNotes.parent_phone = String(participant_details.parent_contact).substring(0, 15);
       if (participant_details.address) razorpayNotes.address = String(participant_details.address).substring(0, 200);
+      
+      // Guru details - PRIORITY FIELDS
+      if (participant_details.guru_name) razorpayNotes.guru_name = String(participant_details.guru_name).substring(0, 100);
+      if (participant_details.guru_contact) razorpayNotes.guru_contact = String(participant_details.guru_contact).substring(0, 15);
+      
+      // Father/Parent details - PRIORITY FIELDS
+      if (participant_details.parent_name) razorpayNotes.father_name = String(participant_details.parent_name).substring(0, 100);
+      if (participant_details.parent_contact) razorpayNotes.father_contact = String(participant_details.parent_contact).substring(0, 15);
+      if (participant_details.parent_occupation) razorpayNotes.father_occupation = String(participant_details.parent_occupation).substring(0, 100);
+      
+      // Event and group details
       if (participant_details.event) razorpayNotes.event = String(participant_details.event).substring(0, 100);
-      if (participant_details.group_members) razorpayNotes.members = String(participant_details.group_members).substring(0, 300);
+      if (participant_details.group_members) razorpayNotes.group_members = String(participant_details.group_members).substring(0, 300);
     }
 
     console.log("📝 Final Razorpay Notes:", razorpayNotes);
