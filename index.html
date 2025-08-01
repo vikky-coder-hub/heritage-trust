@@ -4196,33 +4196,19 @@ https://drive.google.com/drive/folders/0B6FUT-ErZ0mzfjVYeWpFUGFrSi1LTUNpcTRWaXN3
     </tbody>
   </table> 
 
-                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS Rules:</h4>
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS  Rules:</h4>
                         <ul>
-                            <li>Time Duration: 1 hour</li>
-                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
-                            <li>Materials: Participants must bring their own art supplies</li>
-                            <li>Paper will be provided by the organizers</li>
-                            <li>Original artwork only - no copying allowed</li>
-                            <li>Age-appropriate categories will be maintained</li>
+                            <li>Duration: 2 hrs.</li>
+                            <li>An outline sketch based on a theme from Ramayana, Mahabharata or Bhagavatam will be provided on a drawing sheet of 13.5 X 10.5 inches and the student has to colour it (only for Coloring).</li>
+                            <li>12 x 18 inches canvas board will be provided.</li>
+                            <li>Except drawing sheets & canvas all materials like pens, pencils, color pencils, exam-pads,   crayons, eraser etc., should be brought by the participants.</li>
+                            <li>The painting should be based on a theme from Ramayana, Mahabharata, Bhagavatam.</li>
+                           
                         </ul>
-                        
-                        <h4>What to Bring:</h4>
-                        <ul>
-                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
-                            <li>For Painting: Watercolors, brushes, palette</li>
-                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
-                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
-                            <li>All participants must bring their own materials</li>
-                            <li>Basic drawing board or support surface</li>
-                        </ul>
-                        
                         <h4>Judging Criteria:</h4>
                         <ul>
-                            <li>Creativity and originality (30%)</li>
-                            <li>Technical skill and execution (25%)</li>
-                            <li>Theme adherence (20%)</li>
-                            <li>Color harmony and composition (15%)</li>
-                            <li>Overall presentation (10%)</li>
+                            <li>Color Combination, Creativity, Neatness and Overall Presentation.</li>
+                            
                         </ul>
                     `,
           },
@@ -4269,72 +4255,179 @@ https://drive.google.com/drive/folders/0B6FUT-ErZ0mzfjVYeWpFUGFrSi1LTUNpcTRWaXN3
     </tbody>
   </table> 
 
-                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS  Rules:</h4>
                         <ul>
-                            <li>Time Duration: 1 hour</li>
-                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
-                            <li>Materials: Participants must bring their own art supplies</li>
-                            <li>Paper will be provided by the organizers</li>
-                            <li>Original artwork only - no copying allowed</li>
-                            <li>Age-appropriate categories will be maintained</li>
+                            <li>Duration: 2 hrs.</li>
+                            <li>An outline sketch based on a theme from Ramayana, Mahabharata or Bhagavatam will be provided on a drawing sheet of 13.5 X 10.5 inches and the student has to colour it (only for Coloring).</li>
+                            <li>12 x 18 inches canvas board will be provided.</li>
+                            <li>Except drawing sheets & canvas all materials like pens, pencils, color pencils, exam-pads,   crayons, eraser etc., should be brought by the participants.</li>
+                            <li>The painting should be based on a theme from Ramayana, Mahabharata, Bhagavatam.</li>
+                           
+                        </ul>
+                        <h4>Judging Criteria:</h4>
+                        <ul>
+                            <li>Color Combination, Creativity, Neatness and Overall Presentation.</li>
+                            
+                        </ul>
+                    `,
+          },
+        };
+
+        function showModal(contentKey) {
+          const content = modalContent[contentKey];
+          if (content) {
+            document.getElementById("modal-title").textContent = content.title;
+            document.getElementById("modal-body").innerHTML = content.content;
+            document.getElementById("info-modal").style.display = "block";
+          }
+        }
+
+        function closeModal() {
+          document.getElementById("info-modal").style.display = "none";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function (event) {
+          const modal = document.getElementById("info-modal");
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+
+        // Enhanced registration function
+        function submitRegistration() {
+          const form = document.getElementById("registration-form");
+          const formData = new FormData(form);
+
+          // Get selected competitions
+          const selectedCompetitions = [];
+          const checkboxes = form.querySelectorAll(
+            'input[name="competitions"]:checked'
+          );
+          checkboxes.forEach((checkbox) => {
+            selectedCompetitions.push(checkbox.value);
+          });
+
+          if (selectedCompetitions.length === 0) {
+            alert("Please select at least one competition");
+            return;
+          }
+
+          // Calculate total price
+          let totalPrice = 0;
+          selectedCompetitions.forEach((competition) => {
+            let price = 200; // Default price for most competitions
+            if (
+              competition.includes("Gita Sloka Chanting") ||
+              competition.includes("Colouring")
+            ) {
+              price = 150; // ₹150 for Gita Sloka Chanting and Colouring Solo
+            }
+            totalPrice += price;
+          });
+
+          // Show confirmation
+          const studentName = formData.get("student-name");
+          const confirmationMessage = `
+            Student: ${studentName}
+            Selected Competitions: ${selectedCompetitions.join(", ")}
+            Total Amount: ₹${totalPrice}
+            
+            Do you want to proceed with registration?
+          `;
+
+          if (confirm(confirmationMessage)) {
+            // Here you would typically send the data to your server
+            alert(
+              `Registration submitted successfully! 
+              Total Amount: ₹${totalPrice}
+              Please make payment as per the instructions provided.`
+            );
+            form.reset();
+          }
+        }
+
+        // Initialize page
+        document.addEventListener("DOMContentLoaded", function () {
+          // Add any initialization code here
+          console.log("Heritage Fest 2025 website loaded successfully!");
+
+          // Add smooth scrolling for navigation links
+          const navLinks = document.querySelectorAll('a[href^="#"]');
+          navLinks.forEach((link) => {
+            link.addEventListener("click", function (e) {
+              e.preventDefault();
+              const targetId = this.getAttribute("href");
+              const targetSection = document.querySelector(targetId);
+              if (targetSection) {
+                targetSection.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            });
+          });
+        });
+
+        // Competition details modal content
+        const modalContent = {
+          "dance-bhajan-kirtan": {
+            title: "Dance & Bhajan Kirtan Competition Rules",
+            content: `
+                        <h4>Competition Guidelines:</h4>
+                        <p>Express your devotion through dance and song! This competition celebrates the rich tradition of Bhajan and Kirtan while showcasing classical and devotional dance forms.</p>
+                        
+        <table style="border-collapse: collapse; width: 100%; max-width: 850px; margin: auto; font-family: Arial, sans-serif;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Stream</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Class</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Contest</th>
+        <th style="border: 1px solid #000; padding: 10px; text-align: center; background-color: #f8f8f8; font-weight: bold; font-size: 14px;">Solo /<br>Group</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Bhajan / Kirtan</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(G)</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DANCE</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Classical Dance</td>
+        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
+      </tr>
+    </tbody>
+  </table>
+
+                        <h4>Rules for Dance Competitions:</h4>
+                        <ul>
+                            <li>Time limit: Solo - 3-5 minutes, Group - 5-7 minutes</li>
+                            <li>Theme must be devotional/spiritual (Krishna, Radha, Gopis, etc.)</li>
+                            <li>Costumes should be appropriate and traditional</li>
+                            <li>Background music should be provided by participants</li>
+                            <li>Props are allowed but should be manageable</li>
+                            <li>Group size: Maximum 8 participants for group events</li>
                         </ul>
                         
-                        <h4>What to Bring:</h4>
+                        <h4>Rules for Bhajan/Kirtan:</h4>
                         <ul>
-                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
-                            <li>For Painting: Watercolors, brushes, palette</li>
-                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
-                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
-                            <li>All participants must bring their own materials</li>
-                            <li>Basic drawing board or support surface</li>
+                            <li>Time limit: 3-5 minutes</li>
+                            <li>Must be devotional songs related to Lord Krishna</li>
+                            <li>Accompaniment instruments are welcome</li>
+                            <li>Traditional ragas preferred</li>
+                            <li>Group coordination and harmony will be evaluated</li>
                         </ul>
                         
                         <h4>Judging Criteria:</h4>
                         <ul>
-                            <li>Creativity and originality (30%)</li>
-                            <li>Technical skill and execution (25%)</li>
-                            <li>Theme adherence (20%)</li>
-                            <li>Color harmony and composition (15%)</li>
-                            <li>Overall presentation (10%)</li>
+                            <li>Devotional expression and bhava (40%)</li>
+                            <li>Technical skill and rhythm (30%)</li>
+                            <li>Costume and presentation (20%)</li>
+                            <li>Time management (10%)</li>
                         </ul>
-                  ign: center; font-size: 14px;">DRAWING</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A &amp; B</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Colouring</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">A, B, C, D, E &amp; F</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Painting</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Pencil Shading</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">DRAWING</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">B, C, D, E &amp; F</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">Canvas Painting</td>
-        <td style="border: 1px solid #000; padding: 10px; text-align: center; font-size: 14px;">(S)</td>
-      </tr>
-    </tbody>
-  </table> 
-
-     <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING </h4>
-      <h5>Rules</h5>
-                        <ul>
-                            <li>Duration: 2 hrs.</li>
-                            <li>An outline sketch based on a theme from Ramayana, Mahabharata or Bhagavatam will be provided on a drawing sheet of 13.5 X 10.5 inches and the student has to colour it (only for Coloring).</li>
-                            <li>12 x 18 inches canvas board will be provided. </li>
-                            <li>Except drawing sheets & canvas all materials like pens, pencils, color pencils, exam-pads,   crayons, eraser etc., should be brought by the participants.</li>
-                            <li>The painting should be based on a theme from Ramayana, Mahabharata, Bhagavatam.</li>
-                        </ul>
-                        <h4>Judging Criteria: <h4>
-                          <p>Color Combination, Creativity, Neatness and Overall Presentation.</p>
-                        
                     `,
           },
           "shading-rules": {
@@ -4453,33 +4546,19 @@ https://drive.google.com/drive/folders/0B6FUT-ErZ0mzfjVYeWpFUGFrSi1LTUNpcTRWaXN3
     </tbody>
   </table> 
 
-                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS PAINTING Rules:</h4>
+                        <h4>COLORING, PAINTING, PENCIL SHADING & CANVAS  Rules:</h4>
                         <ul>
-                            <li>Time Duration: 1 hour</li>
-                            <li>Theme: Krishna, Radha, Gopis, Vrindavan scenes, or any spiritual/devotional subject</li>
-                            <li>Materials: Participants must bring their own art supplies</li>
-                            <li>Paper will be provided by the organizers</li>
-                            <li>Original artwork only - no copying allowed</li>
-                            <li>Age-appropriate categories will be maintained</li>
+                            <li>Duration: 2 hrs.</li>
+                            <li>An outline sketch based on a theme from Ramayana, Mahabharata or Bhagavatam will be provided on a drawing sheet of 13.5 X 10.5 inches and the student has to colour it (only for Coloring).</li>
+                            <li>12 x 18 inches canvas board will be provided.</li>
+                            <li>Except drawing sheets & canvas all materials like pens, pencils, color pencils, exam-pads,   crayons, eraser etc., should be brought by the participants.</li>
+                            <li>The painting should be based on a theme from Ramayana, Mahabharata, Bhagavatam.</li>
+                           
                         </ul>
-                        
-                        <h4>What to Bring:</h4>
-                        <ul>
-                            <li>For Coloring: Crayons, colored pencils, sketch pens</li>
-                            <li>For Painting: Watercolors, brushes, palette</li>
-                            <li>For Pencil Shading: Pencils (2H to 8B), erasers, blending tools</li>
-                            <li>For Canvas Painting: Acrylic/oil paints, brushes, palette knife</li>
-                            <li>All participants must bring their own materials</li>
-                            <li>Basic drawing board or support surface</li>
-                        </ul>
-                        
                         <h4>Judging Criteria:</h4>
                         <ul>
-                            <li>Creativity and originality (30%)</li>
-                            <li>Technical skill and execution (25%)</li>
-                            <li>Theme adherence (20%)</li>
-                            <li>Color harmony and composition (15%)</li>
-                            <li>Overall presentation (10%)</li>
+                            <li>Color Combination, Creativity, Neatness and Overall Presentation.</li>
+                            
                         </ul>
                     `,
           },
